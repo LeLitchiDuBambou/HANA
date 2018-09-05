@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_MDM_IN" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
-  <origin/>
+<origin/>
   <descriptions defaultDescription="CA_DIM_MDM_FIORI"/>
   <metadata changedAt="2018-07-27 08:53:17.893"/>
   <localVariables/>
@@ -52,6 +52,12 @@
       <calculatedAttribute id="MDM_INSTALLED" hidden="false" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
         <descriptions defaultDescription="MDM_INSTALLED"/>
         <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    
+      <calculatedAttribute id="CC_1" order="5" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+        <keyCalculation datatype="VARCHAR" length="1" expressionLanguage="COLUMN_ENGINE">
           <formula>1</formula>
         </keyCalculation>
       </calculatedAttribute>

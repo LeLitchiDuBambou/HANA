@@ -56,10 +56,14 @@
         </keyCalculation>
       </calculatedAttribute>
     
-      <calculatedAttribute id="CC_1" order="5" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <calculatedAttribute id="CC_2" order="5" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" hidden="false">
+    
         <keyCalculation datatype="VARCHAR" length="1" expressionLanguage="COLUMN_ENGINE">
+    
           <formula>1</formula>
+    
         </keyCalculation>
+    
       </calculatedAttribute>
     </calculatedAttributes>
     <privateDataFoundation>

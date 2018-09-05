@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_O365_SHAREPOINT_USER_ACTIVITY" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_O365_SHAREPOINT_USER_ACTIVITY"/>
+  <metadata changedAt="2018-07-26 17:13:15.075"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="40"/>
+  <dataSources>
+    <DataSource id="O365USAGE_SHAREPOINT_USER_ACTIVITY" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT_SOCIAL_AND_APPS" columnObjectName="O365USAGE_SHAREPOINT_USER_ACTIVITY"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="DATASTR01"/>
+        <viewAttribute id="DATASTR02">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="False"/>
+        </viewAttribute>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATANUM01"/>
+        <viewAttribute id="DATANUM02"/>
+        <viewAttribute id="DATANUM03"/>
+        <viewAttribute id="DATANUM04"/>
+        <viewAttribute id="DATANUM05"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#O365USAGE_SHAREPOINT_USER_ACTIVITY">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR01" source="DATASTR01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM01" source="DATANUM01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM02" source="DATANUM02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM03" source="DATANUM03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM04" source="DATANUM04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM05" source="DATANUM05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions defaultDescription="CA_DIM_O365_SHAREPOINT_USER_ACTIVITY"/>
+    <attributes>
+      <attribute id="DATE_SP" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Execution Date "/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="DATASTR01_SP" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User Principal Name"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="DATASTR02_SP" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Is Deleted"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR03_SP" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Report Type"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATANUM01_SP" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Viewed Or Edited File Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM01"/>
+      </attribute>
+      <attribute id="DATANUM02_SP" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Synced File Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM02"/>
+      </attribute>
+      <attribute id="DATANUM03_SP" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Shared Internally File Count "/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM03"/>
+      </attribute>
+      <attribute id="DATANUM04_SP" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Shared Externally File Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM04"/>
+      </attribute>
+      <attribute id="DATANUM05_SP" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Visited Page Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM05"/>
+      </attribute>
+      <attribute id="DATADAT01_SP" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Activity Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02_SP" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Deleted Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="YEAR_SP" key="true" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH_SP" key="true" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="USER_ACTIVITY_SHAREPOINT" hidden="false" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User activity SharePoint"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;DATANUM01_SP&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="170"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

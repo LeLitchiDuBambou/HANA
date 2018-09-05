@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CA_DIM_NETWORK_SITES" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_NETWORK_SITES"/>
+  <metadata changedAt="2018-07-24 15:54:49.573"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="36"/>
+  <dataSources>
+    <DataSource id="NETWORK_SITES_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="NETWORK_SITES_HISTORISATION"/>
+    </DataSource>
+    <DataSource id="NETWORK_LOCALISATION_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="NETWORK_LOCALISATION_HISTORISATION"/>
+    </DataSource>
+    <DataSource id="CA_DIM_ORGA_ENTREPRISE_ENCOURS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/roc-new/calculationviews/CA_DIM_ORGA_ENTREPRISE_ENCOURS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="SITES">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="ID_ENTRE"/>
+        <viewAttribute id="DHCP"/>
+        <viewAttribute id="ADRESSE_GATEWAY"/>
+        <viewAttribute id="CONTACT"/>
+        <viewAttribute id="TEL"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="PERIODE" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#NETWORK_SITES_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ID_ENTRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DHCP" source="DHCP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE_GATEWAY" source="ADRESSE_GATEWAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT" source="CONTACT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEL" source="TEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="LOCATION">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="ADRESSE"/>
+        <viewAttribute id="CP"/>
+        <viewAttribute id="VILLE"/>
+        <viewAttribute id="PAYS"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="PERIODE" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#NETWORK_LOCALISATION_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE" source="ADRESSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CP" source="CP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VILLE" source="VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PAYS" source="PAYS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="SITES_LOCALISATION" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="ID_ENTRE"/>
+        <viewAttribute id="DHCP"/>
+        <viewAttribute id="ADRESSE_GATEWAY"/>
+        <viewAttribute id="CONTACT"/>
+        <viewAttribute id="TEL"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="ADRESSE"/>
+        <viewAttribute id="CP"/>
+        <viewAttribute id="VILLE"/>
+        <viewAttribute id="PAYS"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="PERIODE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#SITES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ID_ENTRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DHCP" source="DHCP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE_GATEWAY" source="ADRESSE_GATEWAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT" source="CONTACT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEL" source="TEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+      </input>
+      <input node="#LOCATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE" source="ADRESSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CP" source="CP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VILLE" source="VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PAYS" source="PAYS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+      </input>
+      <joinAttribute name="CODE_SITE"/>
+      <joinAttribute name="PERIODE"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="ROC" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="ID_ENTRE"/>
+        <viewAttribute id="DHCP"/>
+        <viewAttribute id="ADRESSE_GATEWAY"/>
+        <viewAttribute id="CONTACT"/>
+        <viewAttribute id="TEL"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="ADRESSE"/>
+        <viewAttribute id="CP"/>
+        <viewAttribute id="VILLE"/>
+        <viewAttribute id="PAYS"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="PERIODE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#SITES_LOCALISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ID_ENTRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DHCP" source="DHCP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE_GATEWAY" source="ADRESSE_GATEWAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT" source="CONTACT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEL" source="TEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE" source="ADRESSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CP" source="CP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VILLE" source="VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PAYS" source="PAYS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+      </input>
+      <input node="#CA_DIM_ORGA_ENTREPRISE_ENCOURS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ENTREPRISE_ID_STR"/>
+      </input>
+      <joinAttribute name="ID_ENTRE"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="ROC">
+    <descriptions/>
+    <attributes>
+      <attribute id="CN" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CN"/>
+        <keyMapping columnObjectName="ROC" columnName="CN"/>
+      </attribute>
+      <attribute id="CODE_SITE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Code site"/>
+        <keyMapping columnObjectName="ROC" columnName="CODE_SITE"/>
+      </attribute>
+      <attribute id="ID_ENTRE" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Bu ID ROC"/>
+        <keyMapping columnObjectName="ROC" columnName="ID_ENTRE"/>
+      </attribute>
+      <attribute id="DHCP" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DHCP"/>
+        <keyMapping columnObjectName="ROC" columnName="DHCP"/>
+      </attribute>
+      <attribute id="ADRESSE_GATEWAY" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Address"/>
+        <keyMapping columnObjectName="ROC" columnName="ADRESSE_GATEWAY"/>
+      </attribute>
+      <attribute id="CONTACT" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Contact"/>
+        <keyMapping columnObjectName="ROC" columnName="CONTACT"/>
+      </attribute>
+      <attribute id="TEL" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Phone"/>
+        <keyMapping columnObjectName="ROC" columnName="TEL"/>
+      </attribute>
+      <attribute id="EMAIL" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="EMAIL"/>
+        <keyMapping columnObjectName="ROC" columnName="EMAIL"/>
+      </attribute>
+      <attribute id="ADRESSE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Address"/>
+        <keyMapping columnObjectName="ROC" columnName="ADRESSE"/>
+      </attribute>
+      <attribute id="CP" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CP"/>
+        <keyMapping columnObjectName="ROC" columnName="CP"/>
+      </attribute>
+      <attribute id="VILLE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="City"/>
+        <keyMapping columnObjectName="ROC" columnName="VILLE"/>
+      </attribute>
+      <attribute id="PAYS" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="ROC" columnName="PAYS"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="ROC" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU Country"/>
+        <keyMapping columnObjectName="ROC" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="ROC" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="ROC" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="ROC" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="ROC" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="ROC" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="PERIODE" order="23" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="ROC" columnName="PERIODE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="DATE" order="20" aggregationType="min" measureType="simple">
+        <descriptions/>
+        <measureMapping columnObjectName="ROC" columnName="DATE"/>
+      </measure>
+      <measure id="YEAR" order="21" aggregationType="sum" measureType="simple">
+        <descriptions/>
+        <measureMapping columnObjectName="ROC" columnName="YEAR"/>
+      </measure>
+      <measure id="MONTH" order="22" aggregationType="sum" measureType="simple">
+        <descriptions/>
+        <measureMapping columnObjectName="ROC" columnName="MONTH"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SITES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="-30" y="370"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="LOCATION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="140" y="370"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="false" modelObjectName="SITES_LOCALISATION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="50" y="270"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="ROC" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="167"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

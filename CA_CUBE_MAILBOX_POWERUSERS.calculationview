@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_CUBE_MAILBOX_POWERUSERS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_MAILBOX_POWERUSERS"/>
+  <metadata activatedAt="2018-06-26 10:09:48.0" changedAt="2018-07-02 16:19:00.75" createdAt="2018-07-02 16:19:00.749"/>
+  <localVariables>
+    <variable id="Period" parameter="true">
+      <descriptions defaultDescription="Period"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="2018-04" length="8" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Application" parameter="true">
+      <descriptions defaultDescription="Application"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="onedrive" length="16" mandatory="true">
+        <valueDomain type="StaticList">
+          <listEntry id="onedrive">
+            <descriptions defaultDescription="OneDrive"/>
+          </listEntry>
+          <listEntry id="skype">
+            <descriptions defaultDescription="Skype"/>
+          </listEntry>
+          <listEntry id="teams">
+            <descriptions defaultDescription="Teams"/>
+          </listEntry>
+          <listEntry id="yammer">
+            <descriptions defaultDescription="Yammer"/>
+          </listEntry>
+          <listEntry id="sharepoint">
+            <descriptions defaultDescription="Sharepoint"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Division" parameter="true">
+      <descriptions defaultDescription="Division"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="*" length="128" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Pole" parameter="true">
+      <descriptions defaultDescription="Pole"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="*" length="256" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Direction" parameter="true">
+      <descriptions defaultDescription="Direction"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="*" length="256" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Entreprise" parameter="true">
+      <descriptions defaultDescription="Entreprise"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="*" length="256" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Pays" parameter="true">
+      <descriptions defaultDescription="Pays"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="*" length="256" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Exclude_VESI" parameter="true">
+      <descriptions defaultDescription="Exclude_VESI"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="N" length="8" mandatory="true">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="21"/>
+  <dataSources>
+    <DataSource id="CA_CUBE_MAILBOX_ALL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_CUBE_MAILBOX_ALL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="USER_ACTIVITY_ONEDRIVE"/>
+        <viewAttribute id="USER_ACTIVITY_SHAREPOINT"/>
+        <viewAttribute id="USER_ACTIVITY_SKYPE"/>
+        <viewAttribute id="USER_ACTIVITY_TEAMS"/>
+        <viewAttribute id="USER_ACTIVITY_YAMMER"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CONSTANTE" length="1" expressionLanguage="COLUMN_ENGINE">
+          <formula>'X'</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="ACTIVITE" expressionLanguage="COLUMN_ENGINE">
+          <formula>if('$$Application$$' = 'onedrive', &quot;USER_ACTIVITY_ONEDRIVE&quot;,&#xD;
+if('$$Application$$' = 'skype', &quot;USER_ACTIVITY_SKYPE&quot;,&#xD;
+if('$$Application$$' = 'teams', &quot;USER_ACTIVITY_TEAMS&quot;,&#xD;
+if('$$Application$$' = 'yammer', &quot;USER_ACTIVITY_YAMMER&quot;, &quot;USER_ACTIVITY_SHAREPOINT&quot;))))</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#CA_CUBE_MAILBOX_ALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_ONEDRIVE" source="USER_ACTIVITY_ONEDRIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SHAREPOINT" source="USER_ACTIVITY_SHAREPOINT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SKYPE" source="USER_ACTIVITY_SKYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_TEAMS" source="USER_ACTIVITY_TEAMS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_YAMMER" source="USER_ACTIVITY_YAMMER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+      </input>
+      <filter>(&quot;PERIODE&quot; = '$$Period$$')&#xD;
+and ('$$Pole$$' = '*' or '$$Pole$$' = &quot;POLE_LIBELLE&quot;)&#xD;
+and ('$$Division$$' = '*' or '$$Division$$' = &quot;DIVISION_LIBELLE&quot;)&#xD;
+and ('$$Direction$$' = '*' or '$$Direction$$' = &quot;DIRECTION_LIBELLE&quot;)&#xD;
+and ('$$Entreprise$$' = '*' or '$$Entreprise$$' = &quot;ENTREPRISE_LIBELLE&quot;)&#xD;
+and ('$$Pays$$' = '*' or '$$Pays$$' = &quot;ENTREPRISE_PAYS_LIBELLE&quot;)&#xD;
+and ('$$Exclude_VESI$$' = 'N' or &quot;SOCIETE_LIBELLE&quot; != 'VINCI Energies Systèmes d\'Information')</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="CONSTANTE"/>
+        <viewAttribute id="ACTIVITE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONSTANTE" source="CONSTANTE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTIVITE" source="ACTIVITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+      </input>
+      <windowFunction dynamicPartitionAttributes="false">
+        <partitionViewAttributeName>CONSTANTE</partitionViewAttributeName>
+        <order byViewAttributeName="ACTIVITE" direction="DESC"/>
+        <rankThreshold>
+          <value>10</value>
+        </rankThreshold>
+        <rankViewAttributeName>RANK</rankViewAttributeName>
+      </windowFunction>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Rank_1">
+    <descriptions defaultDescription="CA_CUBE_MAILBOX_POWERUSERS"/>
+    <attributes>
+      <attribute id="PERIODE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="Rank_1" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="Rank_1" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="DATASTR05" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User"/>
+        <keyMapping columnObjectName="Rank_1" columnName="DATASTR05"/>
+      </attribute>
+      <attribute id="DATASTR06" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Display name"/>
+        <keyMapping columnObjectName="Rank_1" columnName="DATASTR06"/>
+      </attribute>
+      <attribute id="RANK" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="#"/>
+        <keyMapping columnObjectName="Rank_1" columnName="RANK"/>
+      </attribute>
+      <attribute id="CONSTANTE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="X"/>
+        <keyMapping columnObjectName="Rank_1" columnName="CONSTANTE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="ACTIVITE" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Activity"/>
+        <measureMapping columnObjectName="Rank_1" columnName="ACTIVITE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="300"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Rank_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="200"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

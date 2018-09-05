@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UDE:Procedure xmlns:UDE="http://www.sap.com/ndb/SQLCoreModelUDE.ecore" schemaVersion="1" id="PROC_NETWORK_HISTORISATION" runWithInvokerPrivileges="false" accessMode="ReadWrite">
+  <origin/>
+  <descriptions defaultDescription="PROC_NETWORK_HISTORISATION"/>
+  <metadata activatedAt="2018-03-12 12:03:16.0" changedAt="2018-07-02 16:19:16.006" createdAt="2018-07-02 16:19:16.006"/>
+  <schema id="_SYS_BIC"/>
+  <definition>/* ******************************************************************************************
+
+------------------------------------ Description --------------------------------------------
+Cette procédure a pour but d'alimenter les tables:
+&quot;BI_IT&quot;.&quot;NETWORK_FIREWALL_HISTORISATION&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_LIGNES_HISTORISATION&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_LOCALISATION_HISTORISATION&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_SITES_HISTORISATION&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_WIFI_HISTORISATION&quot;
+
+à partir de respectivement :
+&quot;BI_IT&quot;.&quot;NETWORK_FIREWALL&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_LIGNES&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_LOCALISATION&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_SITES&quot;
+&quot;BI_IT&quot;.&quot;NETWORK_WIFI&quot;
+
+Ces dernières sont alimentées par l'équipe réseaux via dépôt de fichiers sur un sFTP chargés par équipe intégration
+Côté BI nous historisons ces informations NETWORK mois par mois via un traitement journalier.
+Mois en cours delete puis rechargé avec les infos rafraichis du jour. 
+
+
+
+---------------------------------- Paramètres d'entrée --------------------------------------
+Aucun
+
+---------------------------------- Paramètres de sortie -------------------------------------
+Aucun
+
+---------------------------------- Historique des modifications -----------------------------
+12/03/2018: Création de la procédure sur BI IT V8
+
+********************************************************************************************* */
+ /********* Begin Procedure Script ************/ 
+ 
+BEGIN  
+
+/*Chargement NETWORK_LIGNES_HISTORISATION*/
+delete from &quot;BI_IT&quot;.&quot;NETWORK_LIGNES_HISTORISATION&quot;  A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;NETWORK_LIGNES_HISTORISATION&quot;(
+DATE,YEAR ,MONTH ,DAY,&quot;CN&quot;,&quot;HOSTNAME&quot;,&quot;TYPE&quot;,&quot;TYPOLOGIE&quot;,&quot;DEBIT_OFFRE&quot;,&quot;DEBIT_MESURE&quot;,&quot;DEBIT_TDB&quot;,&quot;OPERATEUR&quot;,&quot;REF_OPE&quot;,&quot;LOOPBACK/IP_PUBLIQUE&quot;,
+&quot;SOUS_RESEAU_INTERCO&quot;,&quot;MASQUE_SINTER&quot;,&quot;SR1&quot;,&quot;MASQUE_SR1&quot;,&quot;SR2&quot;,&quot;MASQUE_SR2&quot;,&quot;SR3&quot;,&quot;MASQUE_SR3&quot;,&quot;NB_DE_PAIRES&quot;,&quot;DATE_DE_DEBUT&quot;,&quot;DATE_DE_FIN&quot;,
+&quot;SYS_TIME_SOURCE&quot;	
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+&quot;CN&quot;,&quot;HOSTNAME&quot;,&quot;TYPE&quot;,&quot;TYPOLOGIE&quot;,&quot;DEBIT_OFFRE&quot;,&quot;DEBIT_MESURE&quot;,&quot;DEBIT_TDB&quot;,&quot;OPERATEUR&quot;,&quot;REF_OPE&quot;,&quot;LOOPBACK/IP_PUBLIQUE&quot;,&quot;SOUS_RESEAU_INTERCO&quot;,
+&quot;MASQUE_SINTER&quot;,&quot;SR1&quot;,&quot;MASQUE_SR1&quot;,&quot;SR2&quot;,&quot;MASQUE_SR2&quot;,&quot;SR3&quot;,&quot;MASQUE_SR3&quot;,&quot;NB_DE_PAIRES&quot;,&quot;DATE_DE_DEBUT&quot;,&quot;DATE_DE_FIN&quot;,&quot;SYS_TIME_SOURCE&quot;
+from &quot;BI_IT&quot;.&quot;NETWORK_LIGNES&quot; 
+);
+
+/*Chargement NETWORK_FIREWALL_HISTORISATION*/
+delete from &quot;BI_IT&quot;.&quot;NETWORK_FIREWALL_HISTORISATION&quot;  A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;NETWORK_FIREWALL_HISTORISATION&quot;(
+DATE,
+YEAR ,
+MONTH ,
+DAY,
+&quot;CN&quot;,
+&quot;SYSID&quot;,
+&quot;MODELE&quot;,
+&quot;IP_MGT&quot;,
+&quot;ZSCALER_LOCATION_DECLAREE&quot;,
+&quot;ZSCALER_COMMENTAIRE&quot;,
+&quot;TYPE_ZSCALER&quot;,
+&quot;NOM_PAC&quot;,
+&quot;IP_NŒUD_ZSCALER_PRIMAIRE&quot;,
+&quot;IP_NŒUD_ZSCALER_SECONDAIRE&quot;,
+&quot;BACKUP&quot;,
+&quot;TEMPLATE_BACKUP&quot;,
+&quot;URL_FW&quot;,
+&quot;GROUPWEBFILTERING&quot;,
+&quot;WEBFILTERING&quot;	
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+&quot;CN&quot;,
+&quot;SYSID&quot;,
+&quot;MODELE&quot;,
+&quot;IP_MGT&quot;,
+&quot;ZSCALER_LOCATION_DECLAREE&quot;,
+&quot;ZSCALER_COMMENTAIRE&quot;,
+&quot;TYPE_ZSCALER&quot;,
+&quot;NOM_PAC&quot;,
+&quot;IP_NŒUD_ZSCALER_PRIMAIRE&quot;,
+&quot;IP_NŒUD_ZSCALER_SECONDAIRE&quot;,
+&quot;BACKUP&quot;,
+&quot;TEMPLATE_BACKUP&quot;,
+&quot;URL_FW&quot;,
+&quot;GROUPWEBFILTERING&quot;,
+&quot;WEBFILTERING&quot;
+from &quot;BI_IT&quot;.&quot;NETWORK_FIREWALL&quot;
+);
+
+/*Chargement NETWORK_LOCALISATION_HISTORISATION*/
+delete from &quot;BI_IT&quot;.&quot;NETWORK_LOCALISATION_HISTORISATION&quot;  A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;NETWORK_LOCALISATION_HISTORISATION&quot;(
+DATE,
+YEAR ,
+MONTH ,
+DAY,
+&quot;CODE_SITE&quot;,
+&quot;ADRESSE&quot;,
+&quot;CP&quot;,
+&quot;VILLE&quot;,
+&quot;PAYS&quot;	
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+&quot;CODE_SITE&quot;,
+&quot;ADRESSE&quot;,
+&quot;CP&quot;,
+&quot;VILLE&quot;,
+&quot;PAYS&quot;
+from &quot;BI_IT&quot;.&quot;NETWORK_LOCALISATION&quot;
+);
+
+/*Chargement NETWORK_SITES_HISTORISATION*/
+delete from &quot;BI_IT&quot;.&quot;NETWORK_SITES_HISTORISATION&quot;  A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;NETWORK_SITES_HISTORISATION&quot;(
+DATE,
+YEAR ,
+MONTH ,
+DAY,
+&quot;CN&quot;,
+&quot;CODE_SITE&quot;,
+&quot;ID_ENTRE&quot;,
+&quot;DHCP&quot;,
+&quot;ADRESSE_GATEWAY&quot;,
+&quot;CONTACT&quot;,
+&quot;TEL&quot;,
+&quot;EMAIL&quot;,
+&quot;COMMENTAIRE&quot;
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+&quot;CN&quot;,
+substring(&quot;CN&quot;,3,4),
+&quot;ID_ENTRE&quot;,
+&quot;DHCP&quot;,
+&quot;ADRESSE_GATEWAY&quot;,
+&quot;CONTACT&quot;,
+&quot;TEL&quot;,
+&quot;EMAIL&quot;,
+&quot;COMMENTAIRE&quot;
+from &quot;BI_IT&quot;.&quot;NETWORK_SITES&quot;
+);
+
+/*Chargement NETWORK_FIREWALL_HISTORISATION*/
+
+delete from &quot;BI_IT&quot;.&quot;NETWORK_WIFI_HISTORISATION&quot;  A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;NETWORK_WIFI_HISTORISATION&quot; (
+DATE,
+YEAR ,
+MONTH ,
+DAY,
+&quot;CN&quot;,
+&quot;NOUVEAU_HOSTNAME&quot;,
+&quot;IP&quot;,
+&quot;MAC&quot;,
+&quot;MODELE&quot;,
+&quot;EDS_WC_01&quot;,
+&quot;EDS_WC_02&quot;,
+&quot;EDS_WC_03&quot;,
+&quot;COMMENTAIRE&quot;
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+&quot;CN&quot;,
+&quot;NOUVEAU_HOSTNAME&quot;,
+&quot;IP&quot;,
+&quot;MAC&quot;,
+&quot;MODELE&quot;,
+&quot;EDS_WC_01&quot;,
+&quot;EDS_WC_02&quot;,
+&quot;EDS_WC_03&quot;,
+&quot;COMMENTAIRE&quot;
+from &quot;BI_IT&quot;.&quot;NETWORK_WIFI&quot;
+);
+
+
+
+
+END;
+ /********* End Procedure Script ************/</definition>
+  <defaultSchema schemaName="BI_IT"/>
+</UDE:Procedure>

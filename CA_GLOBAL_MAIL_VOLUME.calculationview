@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_GLOBAL_MAIL_VOLUME" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_GLOBAL_MAIL_VOLUME"/>
+  <metadata activatedAt="2017-09-28 13:33:56.0" changedAt="2018-07-02 16:19:11.688" createdAt="2018-07-02 16:19:11.688"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="GLOBAL_MAIL_VOLUME" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="GLOBAL_MAIL_VOLUME"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="SPAM"/>
+        <viewAttribute id="VALID_EMAIL"/>
+        <viewAttribute id="SYS_TIME_SOURCE_MAILVOL"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#GLOBAL_MAIL_VOLUME">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SPAM" source="SPAM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VALID_EMAIL" source="VALID_EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE_MAILVOL" source="SYS_TIME_SOURCE_MAILVOL"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions defaultDescription="CA_GLOBAL_MAIL_VOLUME"/>
+    <attributes>
+      <attribute id="DATE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DATE"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SPAM" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Spam"/>
+        <measureMapping columnObjectName="Projection_1" columnName="SPAM"/>
+      </measure>
+      <measure id="VALID_EMAIL" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Valid Email"/>
+        <measureMapping columnObjectName="Projection_1" columnName="VALID_EMAIL"/>
+      </measure>
+      <measure id="SYS_TIME_SOURCE_MAILVOL" order="5" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update mail volume"/>
+        <measureMapping columnObjectName="Projection_1" columnName="SYS_TIME_SOURCE_MAILVOL"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="POURCENTAGE_VALID_EMAIL" hidden="false" order="4" aggregationType="sum" measureType="simple" datatype="DOUBLE" expressionLanguage="SQL">
+        <descriptions defaultDescription="% of valid Email"/>
+        <formula>&quot;VALID_EMAIL&quot;/(&quot;SPAM&quot;+&quot;VALID_EMAIL&quot;)*100</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="165"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

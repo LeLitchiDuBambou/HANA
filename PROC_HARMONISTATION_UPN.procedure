@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UDE:Procedure xmlns:UDE="http://www.sap.com/ndb/SQLCoreModelUDE.ecore" schemaVersion="1" id="PROC_HARMONISTATION_UPN" runWithInvokerPrivileges="false" accessMode="ReadWrite">
+  <origin/>
+  <descriptions defaultDescription="PROC_HISTORISATION_ROC_ENTREPRISE"/>
+  <metadata changedAt="2018-07-26 15:37:40.475" createdAt="2018-07-26 14:35:58.072"/>
+  <schema id="_SYS_BIC"/>
+  <definition>/* ******************************************************************************************
+
+------------------------------------ Description --------------------------------------------
+Cette procédure a pour but d'harmoniser les UPNs entre tous les référentiels 
+en se basant sur les personnes actives de la table ROC.PERSONNE (Date sortie >now()). 
+Cela evite dans les vues de faire des jointures sur des
+colonnes calculées (non recommandés par SAP) comprenant des UPN convertit en minuscule
+--> Dommageable pour les performances des vues
+
+à partir de :
+&quot;ROC&quot;.&quot;PERSONNE&quot;
+&quot;BI_IT&quot;.&quot;IAM&quot;
+&quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_YAMMER_USER_ACTIVITY&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_TEAMS_USER_ACTIVITY&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SHAREPOINT_USER_ACTIVITY&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_ONEDRIVE_USER_ACTIVITY&quot;
+&quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_EMAIL_APP_USAGE&quot;
+
+---------------------------------- Paramètres d'entrée --------------------------------------
+Aucun
+
+---------------------------------- Paramètres de sortie -------------------------------------
+Aucun
+
+---------------------------------- Historique des modifications -----------------------------
+   26/07/2018 : Création de la procédure
+
+********************************************************************************************* */
+
+
+ /********* Begin Procedure Script ************/ 
+BEGIN 
+
+
+/*
+
+*/
+ 
+--- On harmonise le référentiel MAILBOX INVENTORY-----------
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;MAILBOX_INDICATORS&quot; 
+set DATASTR05=P.UPN 
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;MAILBOX_INDICATORS&quot; 
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR05)
+where P.UPN!=DATASTR05 and DATE_SORTIE>=now();
+
+
+----On harmonise les tables OFFICE 365 -----
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_ONEDRIVE_USER_ACTIVITY&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_ONEDRIVE_USER_ACTIVITY&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_YAMMER_USER_ACTIVITY&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_YAMMER_USER_ACTIVITY&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SHAREPOINT_USER_ACTIVITY&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SHAREPOINT_USER_ACTIVITY&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_TEAMS_USER_ACTIVITY&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_TEAMS_USER_ACTIVITY&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+update &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_EMAIL_APP_USAGE&quot;
+set DATASTR01=UPN
+from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_EMAIL_APP_USAGE&quot;
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(UPN)=lower(DATASTR01)
+where UPN!=DATASTR01 and DATE_SORTIE>=now();
+
+---------On harmonise le référentiel MDM------------
+update  &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot; M
+set M.UPN=P.UPN
+from &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot; M
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(M.UPN)=lower(P.UPN)
+where M.UPN!=P.UPN and DATE_SORTIE>=now();
+
+----------On harmonise le référentiel IAM-----------------
+update &quot;BI_IT&quot;.&quot;IAM&quot; I
+set I.UPN=P.UPN
+from &quot;BI_IT&quot;.&quot;IAM&quot; I
+inner join &quot;ROC&quot;.&quot;PERSONNE&quot; P on lower(I.UPN)=lower(P.UPN)
+where I.UPN!=P.UPN and DATE_SORTIE>=now();
+
+END;
+
+ /********* End Procedure Script ************/</definition>
+  <defaultSchema schemaName="SYSTEM"/>
+</UDE:Procedure>

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="2.3" id="CV_SERVER" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CV_SERVER"/>
+  <metadata changedAt="2018-07-25 10:51:41.675"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="23"/>
+  <dataSources>
+    <DataSource id="SERVER" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="SERVER"/>
+    </DataSource>
+    <DataSource id="CA_DIM_ORGA_ENTREPRISE_ENCOURS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/roc-new/calculationviews/CA_DIM_ORGA_ENTREPRISE_ENCOURS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="AT_SERVER">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SERVER_NETBIOS_NAME"/>
+        <viewAttribute id="ID_BU_ROC"/>
+        <viewAttribute id="ACTIVE_SERVER"/>
+        <viewAttribute id="DNS"/>
+        <viewAttribute id="SCCM_VERSION"/>
+        <viewAttribute id="SCCM_COMPLIANT"/>
+        <viewAttribute id="SEP_VERSION"/>
+        <viewAttribute id="AVAMAR_GRID"/>
+        <viewAttribute id="SUPERVISION"/>
+        <viewAttribute id="SERVICE_SERVER_PRA"/>
+        <viewAttribute id="SCCM_DP"/>
+        <viewAttribute id="SEP_GUP"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="OS"/>
+        <viewAttribute id="OS_VERSION"/>
+        <viewAttribute id="SERVICE_PACK"/>
+        <viewAttribute id="MANUFACTURER"/>
+        <viewAttribute id="MODEL"/>
+        <viewAttribute id="FIN_GARANTIE"/>
+        <viewAttribute id="RIP"/>
+        <viewAttribute id="CORRESPONDANT_INFORMATIQUE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#SERVER">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVER_NETBIOS_NAME" source="SERVER_NETBIOS_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_BU_ROC" source="ID_BU_ROC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTIVE_SERVER" source="ACTIVE_SERVER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DNS" source="DNS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_VERSION" source="SCCM_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_COMPLIANT" source="SCCM_COMPLIANT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEP_VERSION" source="SEP_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AVAMAR_GRID" source="AVAMAR_GRID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUPERVISION" source="SUPERVISION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_SERVER_PRA" source="SERVICE_SERVER_PRA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_DP" source="SCCM_DP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEP_GUP" source="SEP_GUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OS" source="OS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OS_VERSION" source="OS_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_PACK" source="SERVICE_PACK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANUFACTURER" source="MANUFACTURER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODEL" source="MODEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FIN_GARANTIE" source="FIN_GARANTIE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="RIP" source="RIP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CORRESPONDANT_INFORMATIQUE" source="CORRESPONDANT_INFORMATIQUE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_VINCI_STRUCTURE" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="SERVER_NETBIOS_NAME"/>
+        <viewAttribute id="ID_BU_ROC"/>
+        <viewAttribute id="ACTIVE_SERVER"/>
+        <viewAttribute id="DNS"/>
+        <viewAttribute id="SCCM_VERSION"/>
+        <viewAttribute id="SCCM_COMPLIANT"/>
+        <viewAttribute id="SEP_VERSION"/>
+        <viewAttribute id="AVAMAR_GRID"/>
+        <viewAttribute id="SUPERVISION"/>
+        <viewAttribute id="SERVICE_SERVER_PRA"/>
+        <viewAttribute id="SCCM_DP"/>
+        <viewAttribute id="SEP_GUP"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="SOCIETE_PAYS_LIBELLE"/>
+        <viewAttribute id="ENTREPRISEID"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="CODE_PERIMETRE"/>
+        <viewAttribute id="OS"/>
+        <viewAttribute id="OS_VERSION"/>
+        <viewAttribute id="SERVICE_PACK"/>
+        <viewAttribute id="MANUFACTURER"/>
+        <viewAttribute id="MODEL"/>
+        <viewAttribute id="FIN_GARANTIE"/>
+        <viewAttribute id="RIP"/>
+        <viewAttribute id="CORRESPONDANT_INFORMATIQUE"/>
+        <viewAttribute id="ENTREPRISE_VILLE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="SERVER_NETBIOS_NAME_1" length="255" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;SERVER_NETBIOS_NAME&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#AT_SERVER">
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVER_NETBIOS_NAME" source="SERVER_NETBIOS_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_BU_ROC" source="ID_BU_ROC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTIVE_SERVER" source="ACTIVE_SERVER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DNS" source="DNS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_VERSION" source="SCCM_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_COMPLIANT" source="SCCM_COMPLIANT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEP_VERSION" source="SEP_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="AVAMAR_GRID" source="AVAMAR_GRID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SUPERVISION" source="SUPERVISION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_SERVER_PRA" source="SERVICE_SERVER_PRA"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SCCM_DP" source="SCCM_DP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SEP_GUP" source="SEP_GUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OS" source="OS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OS_VERSION" source="OS_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SERVICE_PACK" source="SERVICE_PACK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANUFACTURER" source="MANUFACTURER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODEL" source="MODEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FIN_GARANTIE" source="FIN_GARANTIE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="RIP" source="RIP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CORRESPONDANT_INFORMATIQUE" source="CORRESPONDANT_INFORMATIQUE"/>
+      </input>
+      <input node="#CA_DIM_ORGA_ENTREPRISE_ENCOURS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_PAYS_LIBELLE" source="SOCIETE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISEID" source="ENTREPRISE_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_PERIMETRE" source="CODE_PERIMETRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_VILLE" source="ENTREPRISE_VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_BU_ROC" source="ENTREPRISE_ID_STR"/>
+      </input>
+      <joinAttribute name="ID_BU_ROC"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_VINCI_STRUCTURE">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DATE"/>
+      </attribute>
+      <attribute id="ID_BU_ROC" hidden="true" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Id Business Unit"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ID_BU_ROC"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_PAYS_LIBELLE" hidden="true" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company country Pays Libellé"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SOCIETE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISEID" hidden="true" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business unit ID"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISEID"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription=" Country"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="SERVER_NETBIOS_NAME_1" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="NetBIOS name"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SERVER_NETBIOS_NAME_1"/>
+      </attribute>
+      <attribute id="ACTIVE_SERVER" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Standard server"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ACTIVE_SERVER"/>
+      </attribute>
+      <attribute id="DNS" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DNS domain"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DNS"/>
+      </attribute>
+      <attribute id="SCCM_VERSION" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SCCM version"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SCCM_VERSION"/>
+      </attribute>
+      <attribute id="SCCM_COMPLIANT" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Compliant SCCM version"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SCCM_COMPLIANT"/>
+      </attribute>
+      <attribute id="SEP_VERSION" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEP version"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SEP_VERSION"/>
+      </attribute>
+      <attribute id="AVAMAR_GRID" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="AVAMAR Grid"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="AVAMAR_GRID"/>
+      </attribute>
+      <attribute id="SUPERVISION" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Supervision"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SUPERVISION"/>
+      </attribute>
+      <attribute id="SERVICE_SERVER_PRA" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Server service with PRA/DRP"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SERVICE_SERVER_PRA"/>
+      </attribute>
+      <attribute id="SCCM_DP" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SCCM DP"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SCCM_DP"/>
+      </attribute>
+      <attribute id="SEP_GUP" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SEP GUP"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SEP_GUP"/>
+      </attribute>
+      <attribute id="CODE_PERIMETRE" order="30" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Perimeter Code"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="CODE_PERIMETRE"/>
+      </attribute>
+      <attribute id="OS" order="31" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="OS"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="OS"/>
+      </attribute>
+      <attribute id="OS_VERSION" order="32" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="OS version"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="OS_VERSION"/>
+      </attribute>
+      <attribute id="SERVICE_PACK" order="33" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Service pack"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SERVICE_PACK"/>
+      </attribute>
+      <attribute id="MANUFACTURER" order="34" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Manufacturer"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="MANUFACTURER"/>
+      </attribute>
+      <attribute id="MODEL" order="35" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Model"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="MODEL"/>
+      </attribute>
+      <attribute id="FIN_GARANTIE" order="36" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="End of warranty"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="FIN_GARANTIE"/>
+      </attribute>
+      <attribute id="RIP" order="37" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole IT manager"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="RIP"/>
+      </attribute>
+      <attribute id="CORRESPONDANT_INFORMATIQUE" order="38" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="IT correspondent"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="CORRESPONDANT_INFORMATIQUE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_VILLE" order="39" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU City"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISE_VILLE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="YEAR" hidden="false" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Year"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="MONTH" hidden="false" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Month"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SYS_TIME_SOURCE_EXPLORER" hidden="true" order="15" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Update Easyvista Servers"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>&quot;SYS_TIME_SOURCE&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SERVER_SEP_COMPLIANT" hidden="false" order="23" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Compliant SEP version"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(isnull(&quot;SEP_VERSION&quot;),'no','yes')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SERVER_ON_CLARA" hidden="false" order="24" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="in CLARA"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(&quot;DNS&quot;='dom1.vinci-energies.net','yes',if(&quot;DNS&quot;='VEDOM1','yes','no'))&#xD;
+</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SERVER_ON_AVAMAR" hidden="false" order="25" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="AVAMAR"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(isnull(&quot;AVAMAR_GRID&quot;) or &quot;AVAMAR_GRID&quot;=' -','no','yes')&#xD;
+</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SERVER_NETBIOS_NAME" order="40" aggregationType="sum" engineAggregation="count" measureType="simple">
+        <descriptions defaultDescription="Servers"/>
+        <measureMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SERVER_NETBIOS_NAME"/>
+      </measure>
+      <measure id="SYS_TIME_SOURCE" hidden="true" order="45" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update Easyvista Servers"/>
+        <measureMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SYS_TIME_SOURCE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures>
+      <measure id="NB_SERVERS_SCCM_COMPLIANT" hidden="false" order="41" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME">
+        <descriptions defaultDescription="Compliant SCCM version"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SCCM_COMPLIANT">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="yes"/>
+          </filter>
+          <attributeName>SCCM_COMPLIANT</attributeName>
+        </restriction>
+      </measure>
+      <measure id="NB_SERVERS_SEP_COMPLIANT" hidden="false" order="42" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME">
+        <descriptions defaultDescription="Compliant SEP version"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SEP_VERSION">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="false" value=""/>
+          </filter>
+          <attributeName>SEP_VERSION</attributeName>
+        </restriction>
+      </measure>
+      <measure id="NB_SERVERS_ON_CLARA" hidden="false" order="43" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME" restrictionExpressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="in CLARA"/>
+        <restrictionExpression>(&quot;DNS&quot; = 'dom1.vinci-energies.net' OR &quot;DNS&quot; = 'VEDOM1')</restrictionExpression>
+      </measure>
+      <measure id="NB_SERVER_ON_AVAMAR" hidden="false" order="44" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME">
+        <descriptions defaultDescription="with AVAMAR"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="AVAMAR_GRID">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="false" value=" -"/>
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="false" value=""/>
+          </filter>
+          <attributeName>AVAMAR_GRID</attributeName>
+        </restriction>
+      </measure>
+      <measure id="NB_SERVERS_SCCM_DP" hidden="false" order="46" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME">
+        <descriptions defaultDescription="SCCP DP servers"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SCCM_DP">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="yes"/>
+          </filter>
+          <attributeName>SCCM_DP</attributeName>
+        </restriction>
+      </measure>
+      <measure id="NB_SERVERS_SEP_GUP" hidden="false" order="47" engineAggregation="count" baseMeasure="#SERVER_NETBIOS_NAME">
+        <descriptions defaultDescription="SEP GUP servers"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SEP_GUP">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="yes"/>
+          </filter>
+          <attributeName>SEP_GUP</attributeName>
+        </restriction>
+      </measure>
+    </restrictedMeasures>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="AT_SERVER" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="280"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_VINCI_STRUCTURE" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="24" y="180"/>
+        <rectangleSize height="66" width="171"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

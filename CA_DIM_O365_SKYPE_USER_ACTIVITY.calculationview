@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_O365_SKYPE_USER_ACTIVITY" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_O365_SKYPE_USER_ACTIVITY"/>
+  <metadata changedAt="2018-07-26 17:13:15.283"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="48"/>
+  <dataSources>
+    <DataSource id="O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT_SOCIAL_AND_APPS" columnObjectName="O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="DATASTR01"/>
+        <viewAttribute id="DATASTR02">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="False"/>
+        </viewAttribute>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATANUM01"/>
+        <viewAttribute id="DATANUM02"/>
+        <viewAttribute id="DATANUM03"/>
+        <viewAttribute id="DATANUM04"/>
+        <viewAttribute id="DATANUM05"/>
+        <viewAttribute id="DATANUM06"/>
+        <viewAttribute id="DATANUM07"/>
+        <viewAttribute id="DATANUM08"/>
+        <viewAttribute id="DATANUM09"/>
+        <viewAttribute id="DATANUM10"/>
+        <viewAttribute id="DATANUM11"/>
+        <viewAttribute id="DATANUM12"/>
+        <viewAttribute id="DATANUM13"/>
+        <viewAttribute id="DATANUM14"/>
+        <viewAttribute id="DATANUM15"/>
+        <viewAttribute id="DATANUM16"/>
+        <viewAttribute id="DATANUM17"/>
+        <viewAttribute id="DATANUM18"/>
+        <viewAttribute id="DATANUM19"/>
+        <viewAttribute id="DATANUM20"/>
+        <viewAttribute id="DATANUM21"/>
+        <viewAttribute id="DATANUM22"/>
+        <viewAttribute id="DATANUM23"/>
+        <viewAttribute id="DATANUM24"/>
+        <viewAttribute id="DATANUM25"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#O365USAGE_SKYPEFORBUSINESS_USER_ACTIVITY">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR01" source="DATASTR01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM01" source="DATANUM01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM02" source="DATANUM02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM03" source="DATANUM03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM04" source="DATANUM04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM05" source="DATANUM05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM06" source="DATANUM06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM07" source="DATANUM07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM08" source="DATANUM08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM09" source="DATANUM09"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM10" source="DATANUM10"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM11" source="DATANUM11"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM12" source="DATANUM12"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM13" source="DATANUM13"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM14" source="DATANUM14"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM15" source="DATANUM15"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM16" source="DATANUM16"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM17" source="DATANUM17"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM18" source="DATANUM18"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM19" source="DATANUM19"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM20" source="DATANUM20"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM21" source="DATANUM21"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM22" source="DATANUM22"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM23" source="DATANUM23"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM24" source="DATANUM24"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM25" source="DATANUM25"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions defaultDescription="CA_DIM_O365_SKYPE_USER_ACTIVITY"/>
+    <attributes>
+      <attribute id="DATE_SK" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Execution Date "/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="DATASTR01_SK" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User Principal Name"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="DATASTR02_SK" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Is Deleted"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR03_SK" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Report Type"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATANUM01_SK" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Total P2P Session Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM01"/>
+      </attribute>
+      <attribute id="DATANUM02_SK" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Total Organized Conference Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM02"/>
+      </attribute>
+      <attribute id="DATANUM03_SK" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Total Participated Conference Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM03"/>
+      </attribute>
+      <attribute id="DATANUM04_SK" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P IM Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM04"/>
+      </attribute>
+      <attribute id="DATANUM05_SK" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P Audio Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM05"/>
+      </attribute>
+      <attribute id="DATANUM06_SK" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P Audio Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM06"/>
+      </attribute>
+      <attribute id="DATANUM07_SK" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P Video Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM07"/>
+      </attribute>
+      <attribute id="DATANUM08_SK" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P Video Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM08"/>
+      </attribute>
+      <attribute id="DATANUM09_SK" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P App Sharing Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM09"/>
+      </attribute>
+      <attribute id="DATANUM10_SK" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="P2P File Transfer Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM10"/>
+      </attribute>
+      <attribute id="DATANUM11_SK" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference IM Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM11"/>
+      </attribute>
+      <attribute id="DATANUM12_SK" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Audio Video Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM12"/>
+      </attribute>
+      <attribute id="DATANUM13_SK" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Audio Video Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM13"/>
+      </attribute>
+      <attribute id="DATANUM14_SK" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference App Sharing Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM14"/>
+      </attribute>
+      <attribute id="DATANUM15_SK" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Web Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM15"/>
+      </attribute>
+      <attribute id="DATANUM16_SK" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Dial InOut 3rdParty Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM16"/>
+      </attribute>
+      <attribute id="DATANUM17_SK" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Dial InOut Microsoft Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM17"/>
+      </attribute>
+      <attribute id="DATANUM18_SK" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Dial In Microsoft Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM18"/>
+      </attribute>
+      <attribute id="DATANUM19_SK" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Organized Conference Dial Out Microsoft Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM19"/>
+      </attribute>
+      <attribute id="DATANUM20_SK" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Paricipated Conference IM Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM20"/>
+      </attribute>
+      <attribute id="DATANUM21_SK" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Participated Conference Audio Video Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM21"/>
+      </attribute>
+      <attribute id="DATANUM22_SK" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Participated Conference Audio Video Minutes"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM22"/>
+      </attribute>
+      <attribute id="DATANUM23_SK" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Participated Conference App Sharing Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM23"/>
+      </attribute>
+      <attribute id="DATANUM24_SK" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Participated Conference Web Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM24"/>
+      </attribute>
+      <attribute id="DATANUM25_SK" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Participated Conference Dial In Out 3rdParty Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM25"/>
+      </attribute>
+      <attribute id="DATADAT01_SK" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Activity Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02_SK" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Deleted Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="YEAR_SK" order="33" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH_SK" order="34" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="USER_ACTIVITY_SKYPE" hidden="false" order="32" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User activity Skype for Business"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;DATANUM01_SK&quot;+&quot;DATANUM02_SK&quot;+&quot;DATANUM03_SK&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="170"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

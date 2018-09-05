@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_CUBE_MDM_APPS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_MDM_APPS"/>
+  <metadata changedAt="2018-08-10 09:26:05.623"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="36"/>
+  <dataSources>
+    <DataSource id="CA_DIM_MDM" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_MDM</resourceUri>
+    </DataSource>
+    <DataSource id="CA_CUBE_MAILBOX_ALL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_CUBE_MAILBOX_ALL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:JoinView" id="JOIN_MAILBOX" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="APP_NAME"/>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="UPN_WITHOUT_MAJ"/>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="IN_MDM"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="PLATFORM"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CA_DIM_MDM">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN_WITHOUT_MAJ" source="UPN_WITHOUT_MAJ"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATFORM" source="PLATFORM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+      <input node="#CA_CUBE_MAILBOX_ALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IN_MDM" source="IN_MDM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+      <joinAttribute name="UPN"/>
+      <joinAttribute name="YEAR"/>
+      <joinAttribute name="MONTH"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="FILTRE_IN_MDM" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="APP_NAME"/>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="IN_MDM"/>
+        <viewAttribute id="IN_MDM_1"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="PLATFORM"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#JOIN_MAILBOX">
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IN_MDM" source="IN_MDM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IN_MDM_1" source="IN_MDM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATFORM" source="PLATFORM"/>
+      </input>
+      <filter>(&quot;IN_MDM&quot; ='1 - In MDM')</filter>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="FILTRE_IN_MDM">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODE" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="DATE" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="DATE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="7" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="9" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business unit"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="APP_NAME" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="App name"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="APP_NAME"/>
+      </attribute>
+      <attribute id="UPN" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="UPN"/>
+      </attribute>
+      <attribute id="DATASTR03" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="License"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATASTR04" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Color"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="DATASTR04"/>
+      </attribute>
+      <attribute id="IN_MDM" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MDM user"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="IN_MDM"/>
+      </attribute>
+      <attribute id="PLATFORM" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Platform"/>
+        <keyMapping columnObjectName="FILTRE_IN_MDM" columnName="PLATFORM"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures>
+      <measure id="NB_PEOPLE" hidden="false" order="15" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Nber of users"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="UPN"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="110"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="JOIN_MAILBOX" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="14" y="250"/>
+        <rectangleSize height="82" width="191"/>
+      </shape>
+      <shape expanded="true" modelObjectName="FILTRE_IN_MDM" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="187"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

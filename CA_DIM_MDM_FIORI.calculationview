@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_MDM_FIORI" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_MDM_FIORI"/>
+  <metadata changedAt="2018-07-27 08:53:43.689"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="25"/>
+  <dataSources>
+    <DataSource id="MDM_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="MDM_HISTORISATION"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="APP_NAME">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="Fiori"/>
+        </viewAttribute>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#MDM_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="UPN_FIORI" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="Projection_1" columnName="UPN"/>
+      </attribute>
+      <attribute id="YEAR_FIORI" key="true" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR"/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH_FIORI" key="true" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MONTH"/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="FIORI_INSTALLED" hidden="false" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="FIORI_INSTALLED"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="60" y="90"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="190"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

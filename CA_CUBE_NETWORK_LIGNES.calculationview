@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CA_CUBE_NETWORK_LIGNES" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_NETWORK_LIGNES"/>
+  <metadata changedAt="2018-07-25 10:00:19.793"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="29"/>
+  <dataSources>
+    <DataSource id="NETWORK_LIGNES_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="NETWORK_LIGNES_HISTORISATION"/>
+    </DataSource>
+    <DataSource id="CA_DIM_NETWORK_SITES" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_NETWORK_SITES</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="LIGNES">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="HOSTNAME">
+          <filter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="false"/>
+        </viewAttribute>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="TYPOLOGIE"/>
+        <viewAttribute id="DEBIT_OFFRE"/>
+        <viewAttribute id="DEBIT_MESURE"/>
+        <viewAttribute id="DEBIT_TDB"/>
+        <viewAttribute id="OPERATEUR"/>
+        <viewAttribute id="REF_OPE"/>
+        <viewAttribute id="LOOPBACK_IP_PUBLIQUE"/>
+        <viewAttribute id="SOUS_RESEAU_INTERCO"/>
+        <viewAttribute id="MASQUE_SINTER"/>
+        <viewAttribute id="SR1"/>
+        <viewAttribute id="MASQUE_SR1"/>
+        <viewAttribute id="SR2"/>
+        <viewAttribute id="MASQUE_SR2"/>
+        <viewAttribute id="SR3"/>
+        <viewAttribute id="MASQUE_SR3"/>
+        <viewAttribute id="NB_DE_PAIRES"/>
+        <viewAttribute id="DATE_DE_DEBUT">
+          <filter xsi:type="AccessControl:ListValueFilter" operator="IN" including="false">
+            <operands value="Pas en service"/>
+            <operands value="en construction"/>
+            <operands value="en cours"/>
+          </filter>
+        </viewAttribute>
+        <viewAttribute id="DATE_DE_FIN">
+          <filter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="true"/>
+        </viewAttribute>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="PERIODE" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#NETWORK_LIGNES_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="HOSTNAME" source="HOSTNAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPOLOGIE" source="TYPOLOGIE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_OFFRE" source="DEBIT_OFFRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_MESURE" source="DEBIT_MESURE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_TDB" source="DEBIT_TDB"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OPERATEUR" source="OPERATEUR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REF_OPE" source="REF_OPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LOOPBACK_IP_PUBLIQUE" source="LOOPBACK/IP_PUBLIQUE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOUS_RESEAU_INTERCO" source="SOUS_RESEAU_INTERCO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SINTER" source="MASQUE_SINTER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR1" source="SR1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR1" source="MASQUE_SR1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR2" source="SR2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR2" source="MASQUE_SR2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR3" source="SR3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR3" source="MASQUE_SR3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_DE_PAIRES" source="NB_DE_PAIRES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DE_DEBUT" source="DATE_DE_DEBUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DE_FIN" source="DATE_DE_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="SITES" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="HOSTNAME"/>
+        <viewAttribute id="TYPE"/>
+        <viewAttribute id="TYPOLOGIE"/>
+        <viewAttribute id="DEBIT_OFFRE"/>
+        <viewAttribute id="DEBIT_MESURE"/>
+        <viewAttribute id="DEBIT_TDB"/>
+        <viewAttribute id="OPERATEUR"/>
+        <viewAttribute id="REF_OPE"/>
+        <viewAttribute id="LOOPBACK_IP_PUBLIQUE"/>
+        <viewAttribute id="SOUS_RESEAU_INTERCO"/>
+        <viewAttribute id="MASQUE_SINTER"/>
+        <viewAttribute id="SR1"/>
+        <viewAttribute id="MASQUE_SR1"/>
+        <viewAttribute id="SR2"/>
+        <viewAttribute id="MASQUE_SR2"/>
+        <viewAttribute id="SR3"/>
+        <viewAttribute id="MASQUE_SR3"/>
+        <viewAttribute id="NB_DE_PAIRES"/>
+        <viewAttribute id="DATE_DE_DEBUT"/>
+        <viewAttribute id="DATE_DE_FIN"/>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="DHCP"/>
+        <viewAttribute id="ADRESSE_GATEWAY"/>
+        <viewAttribute id="CONTACT"/>
+        <viewAttribute id="TEL"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="ADRESSE"/>
+        <viewAttribute id="CP"/>
+        <viewAttribute id="VILLE"/>
+        <viewAttribute id="PAYS"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="ID_ENTRE"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#LIGNES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="HOSTNAME" source="HOSTNAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE" source="TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPOLOGIE" source="TYPOLOGIE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_OFFRE" source="DEBIT_OFFRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_MESURE" source="DEBIT_MESURE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEBIT_TDB" source="DEBIT_TDB"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OPERATEUR" source="OPERATEUR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REF_OPE" source="REF_OPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LOOPBACK_IP_PUBLIQUE" source="LOOPBACK_IP_PUBLIQUE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOUS_RESEAU_INTERCO" source="SOUS_RESEAU_INTERCO"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SINTER" source="MASQUE_SINTER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR1" source="SR1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR1" source="MASQUE_SR1"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR2" source="SR2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR2" source="MASQUE_SR2"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SR3" source="SR3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MASQUE_SR3" source="MASQUE_SR3"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_DE_PAIRES" source="NB_DE_PAIRES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DE_DEBUT" source="DATE_DE_DEBUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DE_FIN" source="DATE_DE_FIN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+      <input node="#CA_DIM_NETWORK_SITES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DHCP" source="DHCP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE_GATEWAY" source="ADRESSE_GATEWAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT" source="CONTACT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEL" source="TEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE" source="ADRESSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CP" source="CP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VILLE" source="VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PAYS" source="PAYS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ID_ENTRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+      </input>
+      <joinAttribute name="CN"/>
+      <joinAttribute name="PERIODE"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="SITES">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODE" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="SITES" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="DATE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="SITES" columnName="DATE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="SITES" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU Country"/>
+        <keyMapping columnObjectName="SITES" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="SITES" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="SITES" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="SITES" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="SITES" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="SITES" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="CN" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CN"/>
+        <keyMapping columnObjectName="SITES" columnName="CN"/>
+      </attribute>
+      <attribute id="HOSTNAME" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Hostname"/>
+        <keyMapping columnObjectName="SITES" columnName="HOSTNAME"/>
+      </attribute>
+      <attribute id="TYPE" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Type"/>
+        <keyMapping columnObjectName="SITES" columnName="TYPE"/>
+      </attribute>
+      <attribute id="TYPOLOGIE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Typology"/>
+        <keyMapping columnObjectName="SITES" columnName="TYPOLOGIE"/>
+      </attribute>
+      <attribute id="DEBIT_OFFRE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Offered bandwith"/>
+        <keyMapping columnObjectName="SITES" columnName="DEBIT_OFFRE"/>
+      </attribute>
+      <attribute id="DEBIT_MESURE" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mesured bandwith"/>
+        <keyMapping columnObjectName="SITES" columnName="DEBIT_MESURE"/>
+      </attribute>
+      <attribute id="DEBIT_TDB" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Bandwidth detailed"/>
+        <keyMapping columnObjectName="SITES" columnName="DEBIT_TDB"/>
+      </attribute>
+      <attribute id="OPERATEUR" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Operator"/>
+        <keyMapping columnObjectName="SITES" columnName="OPERATEUR"/>
+      </attribute>
+      <attribute id="REF_OPE" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Ref operator"/>
+        <keyMapping columnObjectName="SITES" columnName="REF_OPE"/>
+      </attribute>
+      <attribute id="LOOPBACK_IP_PUBLIQUE" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Loopback public IP"/>
+        <keyMapping columnObjectName="SITES" columnName="LOOPBACK_IP_PUBLIQUE"/>
+      </attribute>
+      <attribute id="SOUS_RESEAU_INTERCO" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sub network interco"/>
+        <keyMapping columnObjectName="SITES" columnName="SOUS_RESEAU_INTERCO"/>
+      </attribute>
+      <attribute id="MASQUE_SINTER" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mask sinter"/>
+        <keyMapping columnObjectName="SITES" columnName="MASQUE_SINTER"/>
+      </attribute>
+      <attribute id="SR1" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR1"/>
+        <keyMapping columnObjectName="SITES" columnName="SR1"/>
+      </attribute>
+      <attribute id="MASQUE_SR1" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR1 mask"/>
+        <keyMapping columnObjectName="SITES" columnName="MASQUE_SR1"/>
+      </attribute>
+      <attribute id="SR2" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR2"/>
+        <keyMapping columnObjectName="SITES" columnName="SR2"/>
+      </attribute>
+      <attribute id="MASQUE_SR2" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR2 mask"/>
+        <keyMapping columnObjectName="SITES" columnName="MASQUE_SR2"/>
+      </attribute>
+      <attribute id="SR3" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR3"/>
+        <keyMapping columnObjectName="SITES" columnName="SR3"/>
+      </attribute>
+      <attribute id="MASQUE_SR3" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SR3 mask"/>
+        <keyMapping columnObjectName="SITES" columnName="MASQUE_SR3"/>
+      </attribute>
+      <attribute id="NB_DE_PAIRES" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pair number"/>
+        <keyMapping columnObjectName="SITES" columnName="NB_DE_PAIRES"/>
+      </attribute>
+      <attribute id="DATE_DE_DEBUT" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Start date"/>
+        <keyMapping columnObjectName="SITES" columnName="DATE_DE_DEBUT"/>
+      </attribute>
+      <attribute id="DATE_DE_FIN" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="End date"/>
+        <keyMapping columnObjectName="SITES" columnName="DATE_DE_FIN"/>
+      </attribute>
+      <attribute id="CODE_SITE" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Site code"/>
+        <keyMapping columnObjectName="SITES" columnName="CODE_SITE"/>
+      </attribute>
+      <attribute id="DHCP" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DHCP"/>
+        <keyMapping columnObjectName="SITES" columnName="DHCP"/>
+      </attribute>
+      <attribute id="ADRESSE_GATEWAY" order="33" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Address gateway"/>
+        <keyMapping columnObjectName="SITES" columnName="ADRESSE_GATEWAY"/>
+      </attribute>
+      <attribute id="CONTACT" order="34" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Contact"/>
+        <keyMapping columnObjectName="SITES" columnName="CONTACT"/>
+      </attribute>
+      <attribute id="TEL" order="35" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Phone"/>
+        <keyMapping columnObjectName="SITES" columnName="TEL"/>
+      </attribute>
+      <attribute id="EMAIL" order="36" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Email"/>
+        <keyMapping columnObjectName="SITES" columnName="EMAIL"/>
+      </attribute>
+      <attribute id="ADRESSE" order="37" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Address"/>
+        <keyMapping columnObjectName="SITES" columnName="ADRESSE"/>
+      </attribute>
+      <attribute id="CP" order="38" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ZIP code"/>
+        <keyMapping columnObjectName="SITES" columnName="CP"/>
+      </attribute>
+      <attribute id="VILLE" order="39" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="City"/>
+        <keyMapping columnObjectName="SITES" columnName="VILLE"/>
+      </attribute>
+      <attribute id="PAYS" order="40" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="SITES" columnName="PAYS"/>
+      </attribute>
+      <attribute id="ID_ENTRE" hidden="true" order="41" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Bu ID ROC"/>
+        <keyMapping columnObjectName="SITES" columnName="ID_ENTRE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SYS_TIME_SOURCE" order="44" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Last update Network directory"/>
+        <measureMapping columnObjectName="SITES" columnName="SYS_TIME_SOURCE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_LIGNES" hidden="false" order="42" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Lines"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="HOSTNAME"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+      <measure id="NB_SITES" hidden="false" order="43" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Sites"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="CN"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="LIGNES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="60" y="320"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SITES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="60" y="200"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

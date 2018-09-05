@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_GLOBAL_ERP_STATS" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="AT_GLOBAL_ERP_STATS"/>
+  <metadata activatedAt="2017-05-16 10:25:58.0" changedAt="2018-07-02 16:19:11.283" createdAt="2018-07-02 16:19:11.283"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="GLOBAL_ERP_STATS" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="GLOBAL_ERP_STATS">
+    <descriptions defaultDescription="AT_GLOBAL_ERP_STATS"/>
+    <attributes>
+      <attribute id="DATE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DATE"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="DATE"/>
+      </attribute>
+      <attribute id="SOFTWARE_NAME" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Software name"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="SOFTWARE_NAME"/>
+      </attribute>
+      <attribute id="SYS_TIME_SOURCE_ERPSTATS" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Update ERP stats"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="SYS_TIME_SOURCE_ERPSTATS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="INTERRUPTION_DURATION" order="4" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Interruption duration"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="INTERRUPTION_DURATION"/>
+      </measure>
+      <measure id="AVAILABILITY" order="5" aggregationType="sum" engineAggregation="avg" measureType="simple">
+        <descriptions defaultDescription="Availability"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="AVAILABILITY"/>
+      </measure>
+      <measure id="AVAILABILITY_1" order="7" aggregationType="min" measureType="simple">
+        <descriptions defaultDescription="Availability min"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_ERP_STATS" columnName="AVAILABILITY"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

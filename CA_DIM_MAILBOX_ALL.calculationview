@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_MAILBOX_ALL" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" historyEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DEFAULT" enforceSqlExecution="false" executionSemantic="UNDEFINED">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_MAILBOX_ALL"/>
+  <metadata changedAt="2018-07-27 11:03:01.074"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="38"/>
+  <dataSources>
+    <DataSource id="MAILBOX_INDICATORS" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT_SOCIAL_AND_APPS" columnObjectName="MAILBOX_INDICATORS"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:AggregationView" id="MAILBOX">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE">
+          <filter xsi:type="AccessControl:SingleValueFilter" operator="GT" including="true" value="2018-02-28"/>
+        </viewAttribute>
+        <viewAttribute id="DATASTR01"/>
+        <viewAttribute id="DATASTR02"/>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="DATANUM01"/>
+        <viewAttribute id="DATASTR07"/>
+        <viewAttribute id="ID_REF"/>
+        <viewAttribute id="DATEUPDATED"/>
+        <viewAttribute id="DATASTR08"/>
+        <viewAttribute id="DATASTR09"/>
+        <viewAttribute id="DATASTR10"/>
+        <viewAttribute id="DATASTR11"/>
+        <viewAttribute id="DATASTR12"/>
+        <viewAttribute id="DATASTR13"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="DATADAT03"/>
+        <viewAttribute id="DATADAT04"/>
+        <viewAttribute id="DATADAT05"/>
+        <viewAttribute id="DATADAT06"/>
+        <viewAttribute id="DATADAT07"/>
+        <viewAttribute id="DATADAT08"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#MAILBOX_INDICATORS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR01" source="DATASTR01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM01" source="DATANUM01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR07" source="DATASTR07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_REF" source="ID_REF"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATEUPDATED" source="DATEUPDATED"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR08" source="DATASTR08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR09" source="DATASTR09"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR10" source="DATASTR10"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR11" source="DATASTR11"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR12" source="DATASTR12"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR13" source="DATASTR13"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT03" source="DATADAT03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT04" source="DATADAT04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT05" source="DATADAT05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT06" source="DATADAT06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT07" source="DATADAT07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT08" source="DATADAT08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="MAILBOX">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATE"/>
+      </attribute>
+      <attribute id="DATASTR03" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="License"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATASTR04" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Color"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR04"/>
+      </attribute>
+      <attribute id="DATASTR06" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Display name"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR06"/>
+      </attribute>
+      <attribute id="ID_REF" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="ID_REF"/>
+      </attribute>
+      <attribute id="DATEUPDATED" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATEUPDATED"/>
+      </attribute>
+      <attribute id="DATASTR02" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GUID"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR08" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Email"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR08"/>
+      </attribute>
+      <attribute id="DATASTR09" order="9" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Legal hold"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR09"/>
+      </attribute>
+      <attribute id="DATASTR10" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Visio"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR10"/>
+      </attribute>
+      <attribute id="DATASTR11" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Project"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR11"/>
+      </attribute>
+      <attribute id="DATASTR12" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CRM"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR12"/>
+      </attribute>
+      <attribute id="DATASTR13" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PowerBI"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR13"/>
+      </attribute>
+      <attribute id="DATADAT01" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Visio"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02" order="15" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Visio"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="DATADAT03" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Project"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT03"/>
+      </attribute>
+      <attribute id="DATADAT04" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Project"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT04"/>
+      </attribute>
+      <attribute id="DATADAT05" order="18" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation CRM"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT05"/>
+      </attribute>
+      <attribute id="DATADAT06" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation CRM"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT06"/>
+      </attribute>
+      <attribute id="DATADAT07" order="20" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Power BI"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT07"/>
+      </attribute>
+      <attribute id="DATADAT08" order="21" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Power BI"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATADAT08"/>
+      </attribute>
+      <attribute id="DATASTR07" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR07"/>
+      </attribute>
+      <attribute id="DATASTR01" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="DATASTR05" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DATASTR05"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR05"/>
+      </attribute>
+      <attribute id="YEAR" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MONTH"/>
+        <keyMapping columnObjectName="MAILBOX" columnName="MONTH"/>
+      </attribute>
+      <attribute id="DATANUM01$local">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATANUM01"/>
+      </attribute>
+      <attribute id="DATASTR05$local">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="DATASTR05"/>
+      </attribute>
+      <attribute id="MONTH$local">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="MONTH"/>
+      </attribute>
+      <attribute id="YEAR$local">
+        <descriptions/>
+        <keyMapping columnObjectName="MAILBOX" columnName="YEAR"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="FIORI_USER_" hidden="false" order="24" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Fiori user"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(isnull(&quot;FIORI_INSTALLED&quot;),'No','Fiori user')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="IN_MDM" hidden="false" order="25" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MDM user"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>if(isnull(&quot;MDM_INSTALLED&quot;),if(&quot;MAILBOX_ON_MOBILE&quot;='1','2 - VE Mailbox setup but device not in MDM','3 - VE Mailbox not setup on a mobile device'),'1 - In MDM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="MAILBOX_ON_MOBILE" hidden="false" order="26" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MAILBOX_ON_MOBILE"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(&#xD;
+(&#xD;
+(isnull(&quot;MAILBOX_INSTALLED_ON_MOBILE&quot;))&#xD;
+ )&#xD;
+ ,'0','1')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+    <sharedDimensions>
+      <logicalJoin associatedObjectUri="/roc-new/calculationviews/CA_DIM_ORGA_ENTREPRISE_ENCOURS">
+        <attributes>
+          <attributeRef>#DATANUM01$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>ENTREPRISE_ID</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_1" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="CODE_PERIMETRE" hidden="true"/>
+          <attributeReference attributeName="OSMOSE" hidden="true"/>
+          <attributeReference attributeName="CODE_ENTREPRISE" hidden="true"/>
+          <attributeReference attributeName="OSMOSE_ENTREPRISE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_ID" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_TYPE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_PAYS_ID" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_DEVISE_ID" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_DEVISE_CODE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_CODE_POSTAL" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_VILLE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_GEO_LATITUDE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_GEO_LONGITUDE" hidden="true"/>
+          <attributeReference attributeName="ACTIVITE_ID" hidden="true"/>
+          <attributeReference attributeName="ACTIVITE_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="ACTIVITE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="MARQUE_ID" hidden="true"/>
+          <attributeReference attributeName="MARQUE_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="MARQUE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="RESEAU_ID" hidden="true"/>
+          <attributeReference attributeName="RESEAU_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="RESEAU_MARQUE_ID" hidden="true"/>
+          <attributeReference attributeName="RESEAU_MARQUE_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="RESEAU_MARQUE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_CONSO_ID" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_CONSO_CODE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_CONSO_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="ENTREPRISE_CONSO_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_ID" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_TYPE" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_PAYS_ID" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_PAYS_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_DEVISE_ID" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_DEVISE_CODE" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_SIRET" hidden="true"/>
+          <attributeReference attributeName="SOCIETE_TVAINTRACOM" hidden="true"/>
+          <attributeReference attributeName="DIRECTION_ID" hidden="true"/>
+          <attributeReference attributeName="DIRECTION_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="POLE_ID" hidden="true"/>
+          <attributeReference attributeName="POLE_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="POLE_PAYS_ID" hidden="true"/>
+          <attributeReference attributeName="POLE_PAYS_LIBELLE" hidden="true"/>
+          <attributeReference attributeName="POLE_DEVISE_ID" hidden="true"/>
+          <attributeReference attributeName="POLE_DEVISE_CODE" hidden="true"/>
+          <attributeReference attributeName="DIVISION_ID" hidden="true"/>
+          <attributeReference attributeName="DIVISION_ORDRE_EDITION" hidden="true"/>
+          <attributeReference attributeName="GROUPE_ID" hidden="true"/>
+          <attributeReference attributeName="GROUPE_DEVISE_CODE" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_ONEDRIVE_USER_ACTIVITY">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_OD</attributeName>
+          <attributeName>MONTH_OD</attributeName>
+          <attributeName>YEAR_OD</attributeName>
+        </associatedAttributeNames>
+        <properties joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="DATASTR01_OD" hidden="true"/>
+          <attributeReference attributeName="DATASTR02_OD" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_OD" hidden="true"/>
+          <attributeReference attributeName="DATANUM01_OD" hidden="true"/>
+          <attributeReference attributeName="DATANUM02_OD" hidden="true"/>
+          <attributeReference attributeName="DATE_OD" hidden="true"/>
+          <attributeReference attributeName="PERIODE_OD" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_OD" hidden="true"/>
+          <attributeReference attributeName="DATADAT01_OD" hidden="true"/>
+          <attributeReference attributeName="DATANUM04_OD" hidden="true"/>
+          <attributeReference attributeName="DATANUM03_OD" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_OD" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_SHAREPOINT_USER_ACTIVITY">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_SP</attributeName>
+          <attributeName>YEAR_SP</attributeName>
+          <attributeName>MONTH_SP</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="DATASTR02_SP" hidden="true"/>
+          <attributeReference attributeName="DATE_SP" hidden="true"/>
+          <attributeReference attributeName="DATASTR01_SP" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_SP" hidden="true"/>
+          <attributeReference attributeName="DATANUM01_SP" hidden="true"/>
+          <attributeReference attributeName="DATANUM02_SP" hidden="true"/>
+          <attributeReference attributeName="DATANUM03_SP" hidden="true"/>
+          <attributeReference attributeName="DATANUM04_SP" hidden="true"/>
+          <attributeReference attributeName="DATANUM05_SP" hidden="true"/>
+          <attributeReference attributeName="DATADAT01_SP" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_SP" hidden="true"/>
+          <attributeReference attributeName="PERIODE_SP" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_SP" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_SKYPE_USER_ACTIVITY">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_SK</attributeName>
+          <attributeName>YEAR_SK</attributeName>
+          <attributeName>MONTH_SK</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="DATADAT01_SK" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_SK" hidden="true"/>
+          <attributeReference attributeName="PERIODE_SK" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_SK" hidden="true"/>
+          <attributeReference attributeName="DATE_SK" hidden="true"/>
+          <attributeReference attributeName="DATASTR01_SK" hidden="true"/>
+          <attributeReference attributeName="DATASTR02_SK" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM01_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM05_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM06_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM07_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM08_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM09_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM15_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM14_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM16_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM17_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM18_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM21_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM22_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM23_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM24_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM25_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM19_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM20_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM11_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM12_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM10_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM13_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM02_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM03_SK" hidden="true"/>
+          <attributeReference attributeName="DATANUM04_SK" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_TEAMS_USER_ACTIVITY">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_T</attributeName>
+          <attributeName>YEAR_T</attributeName>
+          <attributeName>MONTH_T</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="DATADAT01_T" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_T" hidden="true"/>
+          <attributeReference attributeName="PERIODE_T" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_T" hidden="true"/>
+          <attributeReference attributeName="DATASTR02_T" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_T" hidden="true"/>
+          <attributeReference attributeName="DATANUM01_T" hidden="true"/>
+          <attributeReference attributeName="DATANUM02_T" hidden="true"/>
+          <attributeReference attributeName="DATANUM03_T" hidden="true"/>
+          <attributeReference attributeName="DATANUM04_T" hidden="true"/>
+          <attributeReference attributeName="DATASTR01_T" hidden="true"/>
+          <attributeReference attributeName="DATE_T" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_YAMMER_USER_ACTIVITY">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_Y</attributeName>
+          <attributeName>YEAR_Y</attributeName>
+          <attributeName>MONTH_Y</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="PERIODE_Y" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_Y" hidden="true"/>
+          <attributeReference attributeName="DATADAT01_Y" hidden="true"/>
+          <attributeReference attributeName="DATASTR04_Y" hidden="true"/>
+          <attributeReference attributeName="DATANUM01_Y" hidden="true"/>
+          <attributeReference attributeName="DATANUM02_Y" hidden="true"/>
+          <attributeReference attributeName="DATANUM03_Y" hidden="true"/>
+          <attributeReference attributeName="DATE_Y" hidden="true"/>
+          <attributeReference attributeName="DATASTR01_Y" hidden="true"/>
+          <attributeReference attributeName="DATASTR02_Y" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_Y" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_Y" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_MDM_FIORI">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>UPN_FIORI</attributeName>
+          <attributeName>YEAR_FIORI</attributeName>
+          <attributeName>MONTH_FIORI</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="UPN_FIORI" hidden="true"/>
+          <attributeReference attributeName="PERIODE_FIORI" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_FIORI" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_MDM_IN">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>UPN_MDM</attributeName>
+          <attributeName>YEAR_MDM</attributeName>
+          <attributeName>MONTH_MDM</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="UPN_MDM" hidden="true"/>
+          <attributeReference attributeName="PERIODE_MDM" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_MDM" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_O365_EMAIL_APP_USAGE">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>DATASTR01_E</attributeName>
+          <attributeName>YEAR_E</attributeName>
+          <attributeName>MONTH_E</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="DATE_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR01_E" hidden="true"/>
+          <attributeReference attributeName="PERIODE_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR02_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR03_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR04_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR05_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR06_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR08_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR07_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR09_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR11_E" hidden="true"/>
+          <attributeReference attributeName="DATASTR12_E" hidden="true"/>
+          <attributeReference attributeName="DATADAT01_E" hidden="true"/>
+          <attributeReference attributeName="DATADAT02_E" hidden="true"/>
+          <attributeReference attributeName="DATADAT03_E" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_E" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+      <logicalJoin associatedObjectUri="/BI_IT/calculationviews/CA_DIM_IAM">
+        <attributes>
+          <attributeRef>#DATASTR05$local</attributeRef>
+          <attributeRef>#YEAR$local</attributeRef>
+          <attributeRef>#MONTH$local</attributeRef>
+        </attributes>
+        <associatedAttributeNames>
+          <attributeName>UPN_IAM</attributeName>
+          <attributeName>YEAR_IAM</attributeName>
+          <attributeName>MONTH_IAM</attributeName>
+        </associatedAttributeNames>
+        <properties cardinality="CN_N" joinOperator="Equal" joinType="leftOuter"/>
+        <associatedAttributeFeatures>
+          <attributeReference attributeName="PERIODE_IAM" hidden="true"/>
+          <attributeReference attributeName="UPN_IAM" hidden="true"/>
+          <attributeReference attributeName="UPN_WITHOUT_MAJ_IAM" hidden="true"/>
+        </associatedAttributeFeatures>
+      </logicalJoin>
+    </sharedDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="30" y="130"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="MAILBOX" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="20" y="410"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape modelObjectName="MAILBOX" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+        <upperLeftCorner x="70" y="30"/>
+      </shape>
+      <shape modelObjectName="/roc-new/calculationviews/CA_DIM_ORGA_ENTREPRISE_ENCOURS" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="66" y="655"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_ONEDRIVE_USER_ACTIVITY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="491" y="296"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_SHAREPOINT_USER_ACTIVITY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="979" y="540"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_SKYPE_USER_ACTIVITY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="574" y="892"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_TEAMS_USER_ACTIVITY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="973" y="379"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_YAMMER_USER_ACTIVITY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="584" y="624"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_MDM_FIORI" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="356" y="22"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_MDM_IN" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="487" y="79"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_O365_EMAIL_APP_USAGE" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="968" y="52"/>
+      </shape>
+      <shape modelObjectName="/BI_IT/calculationviews/CA_DIM_IAM" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+        <upperLeftCorner x="325" y="145"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_CUBE_MAJ_SOURCES" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_MAJ_SOURCES"/>
+  <metadata changedAt="2018-07-25 09:52:58.491"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="DATES_MISE_A_JOUR_SOURCES" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="DATES_MISE_A_JOUR_SOURCES"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="DATES_MISE_A_JOUR_SOURCES">
+    <descriptions/>
+    <attributes>
+      <attribute id="NOM_TECHNIQUE_SOURCE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Source technical name"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="DATES_MISE_A_JOUR_SOURCES" columnName="NOM_TECHNIQUE_SOURCE"/>
+      </attribute>
+      <attribute id="LIBELLE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Source"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="DATES_MISE_A_JOUR_SOURCES" columnName="LIBELLE"/>
+      </attribute>
+      <attribute id="DATE_REFRESH" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date refresh"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="DATES_MISE_A_JOUR_SOURCES" columnName="DATE_REFRESH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="FREQUENCE_REFRESH" order="5" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Refresh frequency"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="DATES_MISE_A_JOUR_SOURCES" columnName="FREQUENCE_REFRESH"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_JOURS_SANS_REFRESH" hidden="false" order="4" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Days since last update"/>
+        <formula>daysbetween(&quot;DATE_REFRESH&quot;,now())</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

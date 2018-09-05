@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_CUBE_SOCIETE_RETIL" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_COMPANY_RETIL"/>
+  <metadata activatedAt="2018-04-24 13:04:10.0" changedAt="2018-07-02 16:19:03.549" createdAt="2018-07-02 16:19:03.549"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="41"/>
+  <dataSources>
+    <DataSource id="COMPANY_RETIL" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="COMPANY_RETIL"/>
+    </DataSource>
+    <DataSource id="AT_ORGA_SOCIETE_ENCOURS" type="ATTRIBUTE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/roc-new/attributeviews/AT_ORGA_SOCIETE_ENCOURS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="AT_COMPANY_RETIL">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="OSMOSE"/>
+        <viewAttribute id="NB_EMPLOYEES"/>
+        <viewAttribute id="DESIGNATION_ROLLOUT"/>
+        <viewAttribute id="REGISTER_ROLLOUT"/>
+        <viewAttribute id="CONFORMITY_ROLLOUT"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#COMPANY_RETIL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OSMOSE" source="OSMOSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_EMPLOYEES" source="NB_EMPLOYEES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESIGNATION_ROLLOUT" source="DESIGNATION_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGISTER_ROLLOUT" source="REGISTER_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONFORMITY_ROLLOUT" source="CONFORMITY_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_VINCI" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="OSMOSE"/>
+        <viewAttribute id="NB_EMPLOYEES"/>
+        <viewAttribute id="DESIGNATION_ROLLOUT"/>
+        <viewAttribute id="REGISTER_ROLLOUT"/>
+        <viewAttribute id="CONFORMITY_ROLLOUT"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="SOCIETE_PAYS_LIBELLE"/>
+        <viewAttribute id="CODE_PERIMETRE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#AT_COMPANY_RETIL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="OSMOSE" source="OSMOSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_EMPLOYEES" source="NB_EMPLOYEES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DESIGNATION_ROLLOUT" source="DESIGNATION_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="REGISTER_ROLLOUT" source="REGISTER_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONFORMITY_ROLLOUT" source="CONFORMITY_ROLLOUT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+      <input node="#AT_ORGA_SOCIETE_ENCOURS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_PAYS_LIBELLE" source="SOCIETE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_PERIMETRE" source="CODE_PERIMETRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OSMOSE" source="OSMOSE"/>
+      </input>
+      <joinAttribute name="OSMOSE"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_VINCI">
+    <descriptions defaultDescription="CA_COMPANY_RETIL"/>
+    <attributes>
+      <attribute id="OSMOSE" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="OSMOSE"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="OSMOSE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_PAYS_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="SOCIETE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="DATE" hidden="false" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DATE"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="DATE"/>
+      </attribute>
+      <attribute id="CODE_PERIMETRE" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Perimeter Code"/>
+        <keyMapping columnObjectName="Join_VINCI" columnName="CODE_PERIMETRE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="YEAR" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="year"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="MONTH" hidden="false" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Month"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="PERIODE" hidden="false" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SYS_TIME_SOURCE_EXPLORER" hidden="false" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Update RETIL"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>&quot;SYS_TIME_SOURCE&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SYS_TIME_SOURCE" order="10" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update RETIL"/>
+        <measureMapping columnObjectName="Join_VINCI" columnName="SYS_TIME_SOURCE"/>
+      </measure>
+      <measure id="NB_EMPLOYEES" order="11" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Employees"/>
+        <measureMapping columnObjectName="Join_VINCI" columnName="NB_EMPLOYEES"/>
+      </measure>
+      <measure id="DESIGNATION_ROLLOUT" order="12" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Designated employees"/>
+        <measureMapping columnObjectName="Join_VINCI" columnName="DESIGNATION_ROLLOUT"/>
+      </measure>
+      <measure id="REGISTER_ROLLOUT" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Recorded employees"/>
+        <measureMapping columnObjectName="Join_VINCI" columnName="REGISTER_ROLLOUT"/>
+      </measure>
+      <measure id="CONFORMITY_ROLLOUT" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Compliant employees"/>
+        <measureMapping columnObjectName="Join_VINCI" columnName="CONFORMITY_ROLLOUT"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="AT_COMPANY_RETIL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="290"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_VINCI" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="180"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CA_COLLABORATIVE_SPACE" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_COLLABORATIVE_SPACE"/>
+  <metadata changedAt="2018-07-25 09:34:27.653"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="34"/>
+  <dataSources>
+    <DataSource id="CA_ESPACECO" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT_SOCIAL_AND_APPS/calculationviews/CA_ESPACECO</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="CA_ESPACECO">
+    <descriptions/>
+    <attributes>
+      <attribute id="PERIODE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="NAMESPACE_COLLABORATIVE_SPACE" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Namespace"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="TYPE_COLLABORATIVE_SPACE" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Type"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="TYPE_COLLABORATIVE_SPACE_1" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="aType"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="UPN_SPONSOR" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sponsor UPN"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DATASTR04"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription=" Country"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="YEAR" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Year"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Month"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="MONTH"/>
+      </attribute>
+      <attribute id="CODE_PERIMETRE" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Perimeter Code"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="CODE_PERIMETRE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_ID" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU ID"/>
+        <keyMapping columnObjectName="CA_ESPACECO" columnName="ENTREPRISE_ID"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="SYS_TIME_SOURCE_EXPLORER" hidden="false" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Update Collaborative space"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>&quot;SYS_TIME_SOURCE&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SYS_TIME_SOURCE" order="13" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update Collaborative space"/>
+        <measureMapping columnObjectName="CA_ESPACECO" columnName="DATEUPDATED"/>
+      </measure>
+      <measure id="URL_COLLABORATIVE_SPACE" order="14" aggregationType="sum" engineAggregation="count" measureType="simple">
+        <descriptions defaultDescription="Collaborative spaces"/>
+        <measureMapping columnObjectName="CA_ESPACECO" columnName="DATASTR02"/>
+      </measure>
+      <measure id="NB_VISITORS" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Visitors"/>
+        <measureMapping columnObjectName="CA_ESPACECO" columnName="DATANUM01"/>
+      </measure>
+      <measure id="NB_VIEWS" order="16" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Views"/>
+        <measureMapping columnObjectName="CA_ESPACECO" columnName="DATANUM02"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="Organisation_VINCI">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#SOCIETE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="Organisation_VINCI" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation VINCI"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_ALL" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#SOCIETE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#SOCIETE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

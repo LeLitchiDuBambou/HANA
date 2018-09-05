@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CV_COMPANY_EASYVISTA" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CV_COMPANY_EASYVISTA"/>
+  <metadata activatedAt="2017-06-08 15:20:19.0" changedAt="2018-07-02 16:19:13.991" createdAt="2018-07-02 16:19:13.99"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="25"/>
+  <dataSources>
+    <DataSource id="CA_TICKETS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/easyvista/calculationviews/CA_TICKETS</resourceUri>
+    </DataSource>
+    <DataSource id="AT_ORGA_ENTREPRISE_ENCOURS" type="ATTRIBUTE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/roc-new/attributeviews/AT_ORGA_ENTREPRISE_ENCOURS</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="AT_TICKET_OUVERT">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+        <viewAttribute id="TICK_CREATION_DATE_UT_MIDNIGHT"/>
+        <viewAttribute id="TICK_NATURE_LIB"/>
+        <viewAttribute id="NB_TICKETS_OUVERTS"/>
+        <viewAttribute id="TICK_YEAR"/>
+        <viewAttribute id="TICK_ERP"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CA_TICKETS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_ID_ENT_ROC_BENEFICIAIRE" source="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_CREATION_DATE_UT_MIDNIGHT" source="TICK_CREATION_DATE_UT_MIDNIGHT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_NATURE_LIB" source="TICK_NATURE_LIB"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_TICKETS_OUVERTS" source="KPI_NB_TICKETS_OUVERTS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_YEAR" source="TICK_YEAR_CREATION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_ERP" source="TICK_GROUP_CATEGORIE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_VINCI_STRUCTURE" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="TICK_CREATION_DATE_UT_MIDNIGHT"/>
+        <viewAttribute id="TICK_NATURE_LIB"/>
+        <viewAttribute id="NB_TICKETS_OUVERTS"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="TICK_ERP"/>
+        <viewAttribute id="SYS_TIME_SOURCE"/>
+        <viewAttribute id="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+        <viewAttribute id="CODE_PERIMETRE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#AT_TICKET_OUVERT">
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_CREATION_DATE_UT_MIDNIGHT" source="TICK_CREATION_DATE_UT_MIDNIGHT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_NATURE_LIB" source="TICK_NATURE_LIB"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NB_TICKETS_OUVERTS" source="NB_TICKETS_OUVERTS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_ERP" source="TICK_ERP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE" source="SYS_TIME_SOURCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_ID_ENT_ROC_BENEFICIAIRE" source="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+      </input>
+      <input node="#AT_ORGA_ENTREPRISE_ENCOURS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_PERIMETRE" source="CODE_PERIMETRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TICK_ID_ENT_ROC_BENEFICIAIRE" source="ENTREPRISE_ID_STR"/>
+      </input>
+      <joinAttribute name="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_VINCI_STRUCTURE">
+    <descriptions defaultDescription="CV_COMPANY_EASYVISTA"/>
+    <attributes>
+      <attribute id="TICK_NATURE_LIB" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Type"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="TICK_NATURE_LIB"/>
+      </attribute>
+      <attribute id="TICK_ERP" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Opening topic"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="TICK_ERP"/>
+      </attribute>
+      <attribute id="TICK_CREATION_DATE_UT_MIDNIGHT" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Creation date"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="TICK_CREATION_DATE_UT_MIDNIGHT"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription=" Country"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="TICK_ID_ENT_ROC_BENEFICIAIRE" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="TICK_ID_ENT_ROC_BENEFICIAIRE"/>
+      </attribute>
+      <attribute id="CODE_PERIMETRE" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Perimeter Code"/>
+        <keyMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="CODE_PERIMETRE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="NVARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;TICK_CREATION_DATE_UT_MIDNIGHT&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="YEAR" hidden="false" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Year"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;TICK_CREATION_DATE_UT_MIDNIGHT&quot;,'YYYY')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="MONTH" hidden="false" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Month"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;TICK_CREATION_DATE_UT_MIDNIGHT&quot;,'MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="SYS_TIME_SOURCE_EXPLORER" hidden="false" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Update Easyvista"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>&quot;SYS_TIME_SOURCE&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="NB_TICKETS_OUVERTS" hidden="false" order="7" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Open tickets"/>
+        <measureMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="NB_TICKETS_OUVERTS"/>
+      </measure>
+      <measure id="SYS_TIME_SOURCE" order="8" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update Easyvista"/>
+        <measureMapping columnObjectName="Join_VINCI_STRUCTURE" columnName="SYS_TIME_SOURCE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="Organisation_VINCI">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#SOCIETE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="Organisation_VINCI" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation VINCI"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_ALL" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#SOCIETE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#SOCIETE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="140"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="AT_TICKET_OUVERT" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="25" y="330"/>
+        <rectangleSize height="64" width="191"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_VINCI_STRUCTURE" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="9" y="230"/>
+        <rectangleSize height="82" width="201"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

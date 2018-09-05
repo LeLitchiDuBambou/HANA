@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_IAM" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_IAM"/>
+  <metadata changedAt="2018-07-27 09:17:19.33"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="IAM" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="IAM"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE_IAM"/>
+        <viewAttribute id="UPN_IAM"/>
+        <viewAttribute id="IAM_PWD_CHANGED_TIME"/>
+        <viewAttribute id="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="INTEGER" id="YEAR_IAM" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE_IAM&quot;,'YYYY')</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="MONTH_IAM" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE_IAM&quot;,'MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#IAM">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_IAM" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN_IAM" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_PWD_CHANGED_TIME" source="PWD_CHANGED_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_DATE_DERNIERE_CONNEXION_AD" source="DATE_DERNIERE_CONNEXION_AD"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="UPN_IAM" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="Projection_1" columnName="UPN_IAM"/>
+      </attribute>
+      <attribute id="IAM_PWD_CHANGED_TIME" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Password Change Time"/>
+        <keyMapping columnObjectName="Projection_1" columnName="IAM_PWD_CHANGED_TIME"/>
+      </attribute>
+      <attribute id="IAM_DATE_DERNIERE_CONNEXION_AD" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Connection Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+      </attribute>
+      <attribute id="YEAR_IAM" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR_IAM"/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR_IAM"/>
+      </attribute>
+      <attribute id="MONTH_IAM" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MONTH_IAM"/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH_IAM"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="60" y="90"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="60" y="200"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

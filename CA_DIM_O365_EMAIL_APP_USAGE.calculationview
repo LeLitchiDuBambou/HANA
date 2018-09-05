@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_O365_EMAIL_APP_USAGE" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_O365_EMAIL_APP_USAGE"/>
+  <metadata changedAt="2018-07-26 17:18:33.963"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="28"/>
+  <dataSources>
+    <DataSource id="O365USAGE_EMAIL_APP_USAGE" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT_SOCIAL_AND_APPS" columnObjectName="O365USAGE_EMAIL_APP_USAGE"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="DATASTR01"/>
+        <viewAttribute id="DATASTR02"/>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="DATASTR07"/>
+        <viewAttribute id="DATASTR08"/>
+        <viewAttribute id="DATASTR09"/>
+        <viewAttribute id="DATASTR11"/>
+        <viewAttribute id="DATASTR12"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="DATADAT03"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#O365USAGE_EMAIL_APP_USAGE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR01" source="DATASTR01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR07" source="DATASTR07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR08" source="DATASTR08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR09" source="DATASTR09"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR11" source="DATASTR11"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR12" source="DATASTR12"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT03" source="DATADAT03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+      <filter>( &#xD;
+(&quot;DATASTR11&quot;='Undetermined')&#xD;
+or&#xD;
+ (&quot;DATASTR12&quot;='Undetermined' )&#xD;
+)</filter>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE_E" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Execution Date "/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="DATASTR01_E" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User Principal Name"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="DATASTR02_E" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Display Name"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR03_E" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mail For Mac"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATASTR04_E" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Outlook For Mac"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR04"/>
+      </attribute>
+      <attribute id="DATASTR05_E" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Outlook For Windows"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR05"/>
+      </attribute>
+      <attribute id="DATASTR06_E" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="POP3 App"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR06"/>
+      </attribute>
+      <attribute id="DATASTR07_E" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="IMAP4 App"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR07"/>
+      </attribute>
+      <attribute id="DATASTR08_E" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SMTP App"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR08"/>
+      </attribute>
+      <attribute id="DATASTR09_E" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Report Period"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR09"/>
+      </attribute>
+      <attribute id="DATASTR11_E" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Outlook For Mobile"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR11"/>
+      </attribute>
+      <attribute id="DATASTR12_E" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Other For Mobile"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR12"/>
+      </attribute>
+      <attribute id="DATADAT01_E" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Activity Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02_E" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Deleted Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="DATADAT03_E" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Report Refresh Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT03"/>
+      </attribute>
+      <attribute id="YEAR_E" order="18" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH_E" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE_E" hidden="false" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE_E&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="UPN_WITHOUT_MAJ_E" hidden="false" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Upn lower"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>lower(&quot;DATASTR01_E&quot;)</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="MAILBOX_INSTALLED_ON_MOBILE" hidden="false" order="20" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MAILBOX_INSTALLED_ON_MOBILE"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="220"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

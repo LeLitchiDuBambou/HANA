@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="2.3" id="CA_CUBE_MAILBOX_ALL" applyPrivilegeType="ANALYTIC_PRIVILEGE" cacheInvalidationPeriod="NONE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_MAILBOX_ALL"/>
+  <metadata changedAt="2018-07-27 09:03:20.493"/>
+  <localVariables>
+    <variable id="onedrive_compliant" parameter="true">
+      <descriptions defaultDescription="OneDrive For Business compliancy"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="20" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="sharepoint_compliant" parameter="true">
+      <descriptions defaultDescription="Sharepoint compliancy"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="skype_compliant" parameter="true">
+      <descriptions defaultDescription="Skype For Business compliancy"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="yammer_compliant" parameter="true">
+      <descriptions defaultDescription="Yammer compliancy"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="teams_compliant" parameter="true">
+      <descriptions defaultDescription="Teams compliancy"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="date_to_filter_from" parameter="true">
+      <descriptions defaultDescription="Date to filter from"/>
+      <variableProperties datatype="DATE" defaultValue="2017-09-01" mandatory="false">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="activite_minimum_requise" parameter="true">
+      <descriptions defaultDescription="Minimum activity trashhold"/>
+      <variableProperties datatype="INTEGER" defaultValue="11" mandatory="false">
+        <valueDomain type="empty"/>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="35"/>
+  <dataSources>
+    <DataSource id="CA_DIM_MAILBOX_ALL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_MAILBOX_ALL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="FILTER_BY_INPUT" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="DATASTR08"/>
+        <viewAttribute id="DATASTR09"/>
+        <viewAttribute id="DATASTR10"/>
+        <viewAttribute id="DATASTR12"/>
+        <viewAttribute id="DATASTR11"/>
+        <viewAttribute id="DATASTR13"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="DATADAT03"/>
+        <viewAttribute id="DATADAT04"/>
+        <viewAttribute id="DATADAT05"/>
+        <viewAttribute id="DATADAT06"/>
+        <viewAttribute id="DATADAT07"/>
+        <viewAttribute id="DATADAT08"/>
+        <viewAttribute id="FIORI_USER_"/>
+        <viewAttribute id="IN_MDM"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR02"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="USER_ACTIVITY_ONEDRIVE"/>
+        <viewAttribute id="USER_ACTIVITY_SHAREPOINT"/>
+        <viewAttribute id="USER_ACTIVITY_SKYPE"/>
+        <viewAttribute id="USER_ACTIVITY_TEAMS"/>
+        <viewAttribute id="USER_ACTIVITY_YAMMER"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="IAM_PWD_CHANGED_TIME"/>
+        <viewAttribute id="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CA_DIM_MAILBOX_ALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR08" source="DATASTR08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR09" source="DATASTR09"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR10" source="DATASTR10"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR12" source="DATASTR12"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR11" source="DATASTR11"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR13" source="DATASTR13"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT03" source="DATADAT03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT04" source="DATADAT04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT05" source="DATADAT05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT06" source="DATADAT06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT07" source="DATADAT07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT08" source="DATADAT08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FIORI_USER_" source="FIORI_USER_"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IN_MDM" source="IN_MDM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_ONEDRIVE" source="USER_ACTIVITY_ONEDRIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SHAREPOINT" source="USER_ACTIVITY_SHAREPOINT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SKYPE" source="USER_ACTIVITY_SKYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_TEAMS" source="USER_ACTIVITY_TEAMS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_YAMMER" source="USER_ACTIVITY_YAMMER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_PWD_CHANGED_TIME" source="IAM_PWD_CHANGED_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_DATE_DERNIERE_CONNEXION_AD" source="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+      <filter>(&quot;DATE&quot; >'$$date_to_filter_from$$')</filter>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="CALCULATION">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATASTR04"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="DATASTR08"/>
+        <viewAttribute id="DATASTR09"/>
+        <viewAttribute id="DATASTR10"/>
+        <viewAttribute id="DATASTR12"/>
+        <viewAttribute id="DATASTR11"/>
+        <viewAttribute id="DATASTR13"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="DATADAT03"/>
+        <viewAttribute id="DATADAT04"/>
+        <viewAttribute id="DATADAT05"/>
+        <viewAttribute id="DATADAT06"/>
+        <viewAttribute id="DATADAT07"/>
+        <viewAttribute id="DATADAT08"/>
+        <viewAttribute id="FIORI_USER_"/>
+        <viewAttribute id="IN_MDM"/>
+        <viewAttribute id="DATASTR05"/>
+        <viewAttribute id="DATASTR02"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="USER_ACTIVITY_ONEDRIVE"/>
+        <viewAttribute id="USER_ACTIVITY_SHAREPOINT"/>
+        <viewAttribute id="USER_ACTIVITY_SKYPE"/>
+        <viewAttribute id="USER_ACTIVITY_TEAMS"/>
+        <viewAttribute id="USER_ACTIVITY_YAMMER"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="IAM_PWD_CHANGED_TIME"/>
+        <viewAttribute id="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="INTEGER" id="TOP_GRADE" expressionLanguage="COLUMN_ENGINE">
+          <formula>if('$$onedrive_compliant$$'='checked',1,0)+&#xD;
+if( '$$sharepoint_compliant$$'='checked',1,0) +&#xD;
+if ('$$skype_compliant$$'='checked',1,0)+&#xD;
+if( '$$yammer_compliant$$'='checked',1,0)+&#xD;
+if('$$teams_compliant$$'='checked',1,0)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="ONEDRIVE_QUALITY" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if( isnull(&quot;USER_ACTIVITY_ONEDRIVE&quot;) or &quot;USER_ACTIVITY_ONEDRIVE&quot;&lt;$$activite_minimum_requise$$,'KO','OK')&#xD;
+</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="SHAREPOINT_QUALITY" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(isnull(&quot;USER_ACTIVITY_SHAREPOINT&quot;) or &quot;USER_ACTIVITY_SHAREPOINT&quot;&lt;$$activite_minimum_requise$$,'KO','OK')&#xD;
+</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="SKYPE_QUALITY" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if( isnull(&quot;USER_ACTIVITY_SKYPE&quot;) or &quot;USER_ACTIVITY_SKYPE&quot;&lt;$$activite_minimum_requise$$,'KO','OK')</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="YAMMER_QUALITY" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if( isnull(&quot;USER_ACTIVITY_YAMMER&quot;) or &quot;USER_ACTIVITY_YAMMER&quot;&lt;$$activite_minimum_requise$$,'KO','OK')&#xD;
+</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="TEAMS_QUALITY" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if( isnull(&quot;USER_ACTIVITY_TEAMS&quot;) or &quot;USER_ACTIVITY_TEAMS&quot;&lt;$$activite_minimum_requise$$,'KO','OK')&#xD;
+</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="OK_COMPLIANCE" expressionLanguage="COLUMN_ENGINE">
+          <formula>if('$$onedrive_compliant$$'='checked'  ,if(&quot;ONEDRIVE_QUALITY&quot;='OK',1,0),0)+&#xD;
+if('$$sharepoint_compliant$$'='checked'  ,if(&quot;SHAREPOINT_QUALITY&quot;='OK',1,0),0)+&#xD;
+if('$$skype_compliant$$'='checked' ,if(&quot;SKYPE_QUALITY&quot;='OK',1,0),0)+&#xD;
+if('$$yammer_compliant$$'='checked'  ,if(&quot;YAMMER_QUALITY&quot;='OK',1,0),0)+&#xD;
+if('$$teams_compliant$$'='checked'  ,if(&quot;TEAMS_QUALITY&quot;='OK',1,0),0)&#xD;
+&#xD;
+</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="NOK_COMPLIANCE" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;TOP_GRADE&quot;-&quot;OK_COMPLIANCE&quot;</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="COUNT_COMPLIANCE" expressionLanguage="COLUMN_ENGINE">
+          <formula>1</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#FILTER_BY_INPUT">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR04" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR08" source="DATASTR08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR09" source="DATASTR09"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR10" source="DATASTR10"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR12" source="DATASTR12"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR11" source="DATASTR11"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR13" source="DATASTR13"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT03" source="DATADAT03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT04" source="DATADAT04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT05" source="DATADAT05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT06" source="DATADAT06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT07" source="DATADAT07"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT08" source="DATADAT08"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FIORI_USER_" source="FIORI_USER_"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IN_MDM" source="IN_MDM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR05" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_ONEDRIVE" source="USER_ACTIVITY_ONEDRIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SHAREPOINT" source="USER_ACTIVITY_SHAREPOINT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_SKYPE" source="USER_ACTIVITY_SKYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_TEAMS" source="USER_ACTIVITY_TEAMS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ACTIVITY_YAMMER" source="USER_ACTIVITY_YAMMER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_PWD_CHANGED_TIME" source="IAM_PWD_CHANGED_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IAM_DATE_DERNIERE_CONNEXION_AD" source="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="CALCULATION">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business unit"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="7" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DATASTR03" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="License"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATASTR04" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Color"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR04"/>
+      </attribute>
+      <attribute id="DATASTR06" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Display name"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR06"/>
+      </attribute>
+      <attribute id="DATASTR08" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Email"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR08"/>
+      </attribute>
+      <attribute id="DATASTR02" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="GUID"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR05" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR05"/>
+      </attribute>
+      <attribute id="DATASTR09" order="15" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Legal hold"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR09"/>
+      </attribute>
+      <attribute id="DATASTR10" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Visio"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR10"/>
+      </attribute>
+      <attribute id="DATASTR12" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CRM"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR12"/>
+      </attribute>
+      <attribute id="DATASTR11" order="18" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Project"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR11"/>
+      </attribute>
+      <attribute id="DATASTR13" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PowerBI"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATASTR13"/>
+      </attribute>
+      <attribute id="DATADAT01" order="20" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Visio"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02" order="21" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Visio"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="DATADAT03" order="22" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Project"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT03"/>
+      </attribute>
+      <attribute id="DATADAT04" order="23" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Project"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT04"/>
+      </attribute>
+      <attribute id="DATADAT05" order="24" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation CRM"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT05"/>
+      </attribute>
+      <attribute id="DATADAT06" order="25" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation CRM"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT06"/>
+      </attribute>
+      <attribute id="DATADAT07" order="26" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activation Power BI"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT07"/>
+      </attribute>
+      <attribute id="DATADAT08" order="27" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="De-activation Power BI"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="DATADAT08"/>
+      </attribute>
+      <attribute id="FIORI_USER_" order="28" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Fiori user"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="FIORI_USER_"/>
+      </attribute>
+      <attribute id="IN_MDM" order="29" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MDM user"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="IN_MDM"/>
+      </attribute>
+      <attribute id="ONEDRIVE_QUALITY" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="One Drive activity"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="ONEDRIVE_QUALITY"/>
+      </attribute>
+      <attribute id="SHAREPOINT_QUALITY" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Sharepoint activity"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="SHAREPOINT_QUALITY"/>
+      </attribute>
+      <attribute id="SKYPE_QUALITY" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Skype activity"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="SKYPE_QUALITY"/>
+      </attribute>
+      <attribute id="YAMMER_QUALITY" order="33" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Yammer activity"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="YAMMER_QUALITY"/>
+      </attribute>
+      <attribute id="TEAMS_QUALITY" order="34" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Teams activity"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="TEAMS_QUALITY"/>
+      </attribute>
+      <attribute id="IAM_PWD_CHANGED_TIME" order="36" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Password Change Time"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="IAM_PWD_CHANGED_TIME"/>
+      </attribute>
+      <attribute id="IAM_DATE_DERNIERE_CONNEXION_AD" order="37" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Connection Date"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="IAM_DATE_DERNIERE_CONNEXION_AD"/>
+      </attribute>
+      <attribute id="YEAR" order="61" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH" order="62" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MONTH"/>
+        <keyMapping columnObjectName="CALCULATION" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="LICENSE_E_K" hidden="false" order="35" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="License E or K"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="10">
+          <formula>if(in(leftstr(&quot;DATASTR03&quot;,1),'E','K'),leftstr(&quot;DATASTR03&quot;,1),'Not E or K')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="PERIODE" hidden="false" order="60" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="COUNT_COMPLIANCE" hidden="true" order="40" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Count Compliance"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="COUNT_COMPLIANCE"/>
+      </measure>
+      <measure id="OK_COMPLIANCE" order="41" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="OK"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="OK_COMPLIANCE"/>
+      </measure>
+      <measure id="NOK_COMPLIANCE" order="42" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NOK"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="NOK_COMPLIANCE"/>
+      </measure>
+      <measure id="TOP_GRADE" order="44" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Top grade"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="TOP_GRADE"/>
+      </measure>
+      <measure id="USER_ACTIVITY_YAMMER" hidden="false" order="45" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Posts or Likes Or Read Yammer (last three months)"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="USER_ACTIVITY_YAMMER"/>
+      </measure>
+      <measure id="USER_ACTIVITY_TEAMS" hidden="false" order="46" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Chats or Team chats or Calls in Teams (last three months)"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="USER_ACTIVITY_TEAMS"/>
+      </measure>
+      <measure id="USER_ACTIVITY_SKYPE" hidden="false" order="47" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="P2P sessions or Organized/Participated conferences in Skype (last three months)"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="USER_ACTIVITY_SKYPE"/>
+      </measure>
+      <measure id="USER_ACTIVITY_SHAREPOINT" hidden="false" order="48" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Viewed or edited Sharepoint files (last three months)"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="USER_ACTIVITY_SHAREPOINT"/>
+      </measure>
+      <measure id="USER_ACTIVITY_ONEDRIVE" hidden="false" order="49" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Created or edited OneDrive files (last three months)"/>
+        <measureMapping columnObjectName="CALCULATION" columnName="USER_ACTIVITY_ONEDRIVE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_MAILBOXES" hidden="false" order="38" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Mailboxes"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="DATASTR02"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+      <measure id="NB_PEOPLE" hidden="false" order="39" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Nber of users"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="DATASTR05"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+      <measure id="POURC_CONFORMITE" hidden="false" order="43" aggregationType="sum" measureType="simple" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="% compliancy"/>
+        <formula>if(&quot;TOP_GRADE&quot;!=0,&quot;OK_COMPLIANCE&quot;*100/&quot;TOP_GRADE&quot;,100)</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures>
+      <measure id="COUNT_ONEDRIVE_OK" hidden="false" order="50" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="OneDrive OK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="ONEDRIVE_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+          </filter>
+          <attributeName>ONEDRIVE_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_ONEDRIVE_NOK" hidden="true" order="51" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="OneDrive NOK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="ONEDRIVE_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="KO"/>
+          </filter>
+          <attributeName>ONEDRIVE_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_SHAREPOINT_OK" hidden="false" order="52" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Sharepoint OK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SHAREPOINT_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+          </filter>
+          <attributeName>SHAREPOINT_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_SHAREPOINT_NOK" hidden="true" order="53" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Sharepoint NOK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SHAREPOINT_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="KO"/>
+          </filter>
+          <attributeName>SHAREPOINT_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_SKYPE_OK" hidden="false" order="54" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Skype OK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SKYPE_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+          </filter>
+          <attributeName>SKYPE_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_SKYPE_NOK" hidden="true" order="55" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Skype NOK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="SKYPE_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="KO"/>
+          </filter>
+          <attributeName>SKYPE_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_YAMMER_OK" hidden="false" order="56" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Yammer OK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="YAMMER_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+          </filter>
+          <attributeName>YAMMER_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_YAMMER_NOK" hidden="true" order="57" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Yammer NOK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="YAMMER_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="KO"/>
+          </filter>
+          <attributeName>YAMMER_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_TEAMS_OK" hidden="false" order="58" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Teams OK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="TEAMS_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+          </filter>
+          <attributeName>TEAMS_QUALITY</attributeName>
+        </restriction>
+      </measure>
+      <measure id="COUNT_TEAMS_NOK" hidden="true" order="59" baseMeasure="#COUNT_COMPLIANCE">
+        <descriptions defaultDescription="Teams NOK"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="TEAMS_QUALITY">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="KO"/>
+          </filter>
+          <attributeName>TEAMS_QUALITY</attributeName>
+        </restriction>
+      </measure>
+    </restrictedMeasures>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="46" y="90"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="FILTER_BY_INPUT" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="46" y="280"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CALCULATION" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="30" y="180"/>
+        <rectangleSize height="64" width="171"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

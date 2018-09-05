@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UDE:Procedure xmlns:UDE="http://www.sap.com/ndb/SQLCoreModelUDE.ecore" schemaVersion="1" id="PROC_DATES_MAJ_SOURCES" runWithInvokerPrivileges="false" accessMode="ReadWrite">
+  <origin/>
+  <descriptions defaultDescription="PROC_HISTORISATION_ROC_ENTREPRISE"/>
+  <metadata changedAt="2018-07-24 10:06:15.941" createdAt="2018-07-02 16:19:15.271"/>
+  <schema id="_SYS_BIC"/>
+  <definition>/* ******************************************************************************************
+
+------------------------------------ Description --------------------------------------------
+Cette procédure a pour but d'alimenter la table &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; afin d'avoir
+les dates de mise-à-jour des différentes sources.
+
+à partir de :
+
+
+---------------------------------- Paramètres d'entrée --------------------------------------
+Aucun
+
+---------------------------------- Paramètres de sortie -------------------------------------
+Aucun
+
+---------------------------------- Historique des modifications -----------------------------
+   20/02/2016 : Création de la procédure
+12/03/2018: Mise-à-jour de la documentation procédure
+
+********************************************************************************************* */
+
+
+ /********* Begin Procedure Script ************/ 
+BEGIN 
+
+--- Création de la table &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot;
+/*
+drop table &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot;;
+ CREATE COLUMN TABLE &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; (
+	 &quot;NOM_TECHNIQUE_SOURCE&quot; NVARCHAR(100),
+	 &quot;LIBELLE&quot; NVARCHAR(100),
+	&quot;LANGUE&quot; NVARCHAR(10),
+	 &quot;DATE_REFRESH&quot; DATE,
+     &quot;FREQUENCE_REFRESH&quot; INTEGER);
+
+*/
+
+/*
+On historise mois par mois les données. Le mois en cours est màj de façon journalière. 
+On delete les infos du mois et on recharge
+ */
+delete from  &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; A;
+
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('MAILBOX','Mailbox inventory','en', (select max(DATEUPDATED) from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;MAILBOX_INDICATORS&quot;),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('COMPUTER','SCCM','en', to_date(to_varchar((select max(SYS_TIME_SOURCE) from &quot;BI_IT&quot;.&quot;COMPUTER&quot;),'YYYY-MM-DD'),'YYYY-MM-DD'),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('IAM','IAM','en', (select max(SYS_TIME_SOURCE_IAM) from &quot;BI_IT&quot;.&quot;IAM&quot;),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('MDM','MDM','en', (select max(left(INSTALLED_DATE,10)) from &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot; ),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('NETWORK','Network ','en', (select max(SYS_TIME_SOURCE) from &quot;BI_IT&quot;.&quot;NETWORK_LIGNES&quot; ),30);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('SERVEUR','Server ','en', to_date(to_varchar((select max(SYS_TIME_SOURCE) from &quot;BI_IT&quot;.&quot;SERVER&quot;),'YYYY-MM-DD'),'YYYY-MM-DD'),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('ANNUAIRE_ROC','Annuaire/ROC ','en', (select max(DATEUPDATED) from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;ANNUAIRE_INDICATORS_NEW&quot;),1);
+insert into &quot;BI_IT&quot;.&quot;DATES_MISE_A_JOUR_SOURCES&quot; values ('OFFICE365','Office 365','en', (select max(DATE) from &quot;BI_IT_SOCIAL_AND_APPS&quot;.&quot;O365USAGE_TEAMS_USER_ACTIVITY&quot;),1);
+
+END;
+ /********* End Procedure Script ************/</definition>
+  <defaultSchema schemaName="SYSTEM"/>
+</UDE:Procedure>

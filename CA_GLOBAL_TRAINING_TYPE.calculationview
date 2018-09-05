@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_GLOBAL_TRAINING_TYPE" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="CA_GLOBAL_TRAINING_TYPE"/>
+  <metadata activatedAt="2017-05-16 10:25:58.0" changedAt="2018-07-02 16:19:13.208" createdAt="2018-07-02 16:19:13.208"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="GLOBAL_TRAINING_TYPE" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="GLOBAL_TRAINING_TYPE"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews/>
+  <logicalModel id="GLOBAL_TRAINING_TYPE">
+    <descriptions defaultDescription="CA_GLOBAL_TRAINING_TYPE"/>
+    <attributes>
+      <attribute id="DATE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping schemaName="BI_IT" columnObjectName="GLOBAL_TRAINING_TYPE" columnName="DATE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="NB_INTRA_SESSION" order="2" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Intra-session"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_TRAINING_TYPE" columnName="NB_INTRA_SESSION"/>
+      </measure>
+      <measure id="NB_INTER_SESSION" order="3" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Inter-session"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_TRAINING_TYPE" columnName="NB_INTER_SESSION"/>
+      </measure>
+      <measure id="SYS_TIME_SOURCE_TRAINTYPE" order="4" aggregationType="max" measureType="simple">
+        <descriptions defaultDescription="Update training"/>
+        <measureMapping schemaName="BI_IT" columnObjectName="GLOBAL_TRAINING_TYPE" columnName="SYS_TIME_SOURCE_TRAINTYPE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

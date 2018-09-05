@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_MDM" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Projection">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_REF_DEVICES"/>
+  <metadata changedAt="2018-07-26 17:13:13.905" createdAt="2018-07-02 16:19:05.165"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="27"/>
+  <dataSources>
+    <DataSource id="VIEW_DEVICE" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="MOBILITY" columnObjectName="VIEW_DEVICE"/>
+    </DataSource>
+    <DataSource id="MDM_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="MDM_HISTORISATION"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="UNICITE_MODEL_NUMBER">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="MODEL_NUMBER"/>
+        <viewAttribute id="BRAND"/>
+        <viewAttribute id="MARKETING_NAME"/>
+        <viewAttribute id="CODE_NAME"/>
+        <viewAttribute id="LAST_ENTRY">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="1"/>
+        </viewAttribute>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#VIEW_DEVICE">
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODEL_NUMBER" source="MODEL_NUMBER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BRAND" source="BRAND"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MARKETING_NAME" source="MARKETING_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_NAME" source="CODE_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LAST_ENTRY" source="LAST_ENTRY"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="DAY"/>
+        <viewAttribute id="USERNAME"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="ID"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="DEVICE_NAME"/>
+        <viewAttribute id="DEVICE_TYPE"/>
+        <viewAttribute id="DEVICE_MODEL"/>
+        <viewAttribute id="DEVICE_OS"/>
+        <viewAttribute id="DEVICE_ID"/>
+        <viewAttribute id="MANAGED_TYPE"/>
+        <viewAttribute id="PLATFORM"/>
+        <viewAttribute id="INSTALLED_DATE"/>
+        <viewAttribute id="ID_DATE"/>
+        <viewAttribute id="ID_WEEK"/>
+        <viewAttribute id="ID_MONTH"/>
+        <viewAttribute id="LAST_REPORTED"/>
+        <viewAttribute id="LR_DATE"/>
+        <viewAttribute id="LR_WEEK"/>
+        <viewAttribute id="LR_MONTH"/>
+        <viewAttribute id="C_MARKETING_NAME"/>
+        <viewAttribute id="IS_12_MONTHS"/>
+        <viewAttribute id="OWNERSHIP"/>
+        <viewAttribute id="APP_ID"/>
+        <viewAttribute id="APP_NAME"/>
+        <viewAttribute id="APP_INSTALLED_DATE"/>
+        <viewAttribute id="APP_ID_DATE"/>
+        <viewAttribute id="APP_ID_WEEK"/>
+        <viewAttribute id="APP_ID_MONTH"/>
+        <viewAttribute id="APP_VERSION"/>
+        <viewAttribute id="BRAND"/>
+        <viewAttribute id="MARKETING_NAME"/>
+        <viewAttribute id="CODE_NAME"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#MDM_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DAY" source="DAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USERNAME" source="USERNAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_NAME" source="DEVICE_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_TYPE" source="DEVICE_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_MODEL" source="DEVICE_MODEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_OS" source="DEVICE_OS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_ID" source="DEVICE_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANAGED_TYPE" source="MANAGED_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PLATFORM" source="PLATFORM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="INSTALLED_DATE" source="INSTALLED_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_DATE" source="ID_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_WEEK" source="ID_WEEK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_MONTH" source="ID_MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LAST_REPORTED" source="LAST_REPORTED"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LR_DATE" source="LR_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LR_WEEK" source="LR_WEEK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LR_MONTH" source="LR_MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="C_MARKETING_NAME" source="C_MARKETING_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IS_12_MONTHS" source="IS_12_MONTHS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OWNERSHIP" source="OWNERSHIP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_ID" source="APP_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_INSTALLED_DATE" source="APP_INSTALLED_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_ID_DATE" source="APP_ID_DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_ID_WEEK" source="APP_ID_WEEK"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_ID_MONTH" source="APP_ID_MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_VERSION" source="APP_VERSION"/>
+      </input>
+      <input node="#UNICITE_MODEL_NUMBER">
+        <mapping xsi:type="Calculation:AttributeMapping" target="BRAND" source="BRAND"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MARKETING_NAME" source="MARKETING_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_NAME" source="CODE_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_MODEL" source="MODEL_NUMBER"/>
+      </input>
+      <joinAttribute name="DEVICE_MODEL"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions defaultDescription="CA_DIM_REF_DEVICES"/>
+    <attributes>
+      <attribute id="DATE" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="YEAR" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="MONTH"/>
+      </attribute>
+      <attribute id="DAY" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DAY"/>
+      </attribute>
+      <attribute id="USERNAME" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="USERNAME"/>
+      </attribute>
+      <attribute id="UPN" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="UPN"/>
+      </attribute>
+      <attribute id="ID" order="7" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="ID"/>
+      </attribute>
+      <attribute id="EMAIL" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="EMAIL"/>
+      </attribute>
+      <attribute id="DEVICE_NAME" order="9" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_NAME"/>
+      </attribute>
+      <attribute id="DEVICE_TYPE" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_TYPE"/>
+      </attribute>
+      <attribute id="DEVICE_MODEL" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_MODEL"/>
+      </attribute>
+      <attribute id="DEVICE_OS" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_OS"/>
+      </attribute>
+      <attribute id="DEVICE_ID" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_ID"/>
+      </attribute>
+      <attribute id="MANAGED_TYPE" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="MANAGED_TYPE"/>
+      </attribute>
+      <attribute id="PLATFORM" order="15" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="PLATFORM"/>
+      </attribute>
+      <attribute id="INSTALLED_DATE" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="INSTALLED_DATE"/>
+      </attribute>
+      <attribute id="ID_DATE" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_DATE"/>
+      </attribute>
+      <attribute id="ID_WEEK" order="18" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_WEEK"/>
+      </attribute>
+      <attribute id="ID_MONTH" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="ID_MONTH"/>
+      </attribute>
+      <attribute id="LAST_REPORTED" order="20" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="LAST_REPORTED"/>
+      </attribute>
+      <attribute id="LR_DATE" order="21" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="LR_DATE"/>
+      </attribute>
+      <attribute id="LR_WEEK" order="22" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="LR_WEEK"/>
+      </attribute>
+      <attribute id="LR_MONTH" order="23" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="LR_MONTH"/>
+      </attribute>
+      <attribute id="C_MARKETING_NAME" order="24" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="C_MARKETING_NAME"/>
+      </attribute>
+      <attribute id="IS_12_MONTHS" order="25" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="IS_12_MONTHS"/>
+      </attribute>
+      <attribute id="OWNERSHIP" order="26" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="OWNERSHIP"/>
+      </attribute>
+      <attribute id="APP_ID" order="27" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_ID"/>
+      </attribute>
+      <attribute id="APP_NAME" order="28" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_NAME"/>
+      </attribute>
+      <attribute id="APP_INSTALLED_DATE" order="29" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_INSTALLED_DATE"/>
+      </attribute>
+      <attribute id="APP_ID_DATE" order="30" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_ID_DATE"/>
+      </attribute>
+      <attribute id="APP_ID_WEEK" order="31" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_ID_WEEK"/>
+      </attribute>
+      <attribute id="APP_ID_MONTH" order="32" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_ID_MONTH"/>
+      </attribute>
+      <attribute id="APP_VERSION" order="33" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_VERSION"/>
+      </attribute>
+      <attribute id="BRAND" order="34" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="BRAND"/>
+      </attribute>
+      <attribute id="MARKETING_NAME" order="35" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="MARKETING_NAME"/>
+      </attribute>
+      <attribute id="CODE_NAME" order="36" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="CODE_NAME"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="37" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="20">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+      <calculatedAttribute id="UPN_WITHOUT_MAJ" hidden="false" order="38" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN_WITHOUT_MAJ"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="100">
+          <formula>lower(&quot;UPN&quot;)</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="UNICITE_MODEL_NUMBER" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="4" y="290"/>
+        <rectangleSize height="64" width="211"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="170"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

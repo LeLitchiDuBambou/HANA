@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UDE:Procedure xmlns:UDE="http://www.sap.com/ndb/SQLCoreModelUDE.ecore" schemaVersion="1" id="PROC_HISTORISATION_MDM" runWithInvokerPrivileges="false" accessMode="ReadWrite">
+  <origin/>
+  <descriptions defaultDescription="PROC_HISTORISATION_ROC_ENTREPRISE"/>
+  <metadata activatedAt="2018-03-12 11:56:38.0" changedAt="2018-07-02 16:19:15.651" createdAt="2018-07-02 16:19:15.65"/>
+  <schema id="_SYS_BIC"/>
+  <definition>/* ******************************************************************************************
+
+------------------------------------ Description --------------------------------------------
+Cette procédure a pour but d'alimenter la table MDM_HISTORISATION à partir des tables MOBILITY. 
+Ces dernières sont alimentés par l'équipe Mobility avec les informations de la MDM.
+Côté BI nous historisons ces informations MDM mois par mois via un traitement journalier.
+Mois en cours delete puis rechargé avec les infos rafraichis du jour. 
+
+à partir de :
+&quot;MOBILITY&quot;.&quot;MDM_DEVICE&quot;
+&quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot;
+
+
+---------------------------------- Paramètres d'entrée --------------------------------------
+Aucun
+
+---------------------------------- Paramètres de sortie -------------------------------------
+Aucun
+
+---------------------------------- Historique des modifications -----------------------------
+   20/02/2016 : Création de la procédure
+12/03/2018: Mise-à-jour de la documentation procédure
+
+********************************************************************************************* */
+
+
+ /********* Begin Procedure Script ************/ 
+BEGIN 
+
+--- Création de la table MDM_HISTORISATION
+/*
+CREATE COLUMN TABLE &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot; (&quot;DATE&quot; DATE CS_DAYDATE NOT NULL ,
+	 &quot;YEAR&quot; INTEGER CS_INT,
+	 &quot;MONTH&quot; INTEGER CS_INT,
+	 &quot;DAY&quot; INTEGER CS_INT,
+	 &quot;USERNAME&quot; NVARCHAR(300),
+	 &quot;UPN&quot; NVARCHAR(300),
+	 &quot;ID&quot; NVARCHAR(300),
+	 &quot;EMAIL&quot; NVARCHAR(300),
+	 &quot;DEVICE_NAME&quot; NVARCHAR(300),
+	 &quot;DEVICE_TYPE&quot; NVARCHAR(300),
+	 &quot;DEVICE_MODEL&quot; NVARCHAR(300),
+	 &quot;DEVICE_OS&quot; NVARCHAR(300),
+	 &quot;DEVICE_ID&quot; NVARCHAR(300),
+	 &quot;MANAGED_TYPE&quot; NVARCHAR(300),
+	 &quot;PLATFORM&quot; NVARCHAR(300),
+	 &quot;INSTALLED_DATE&quot; NVARCHAR(300),
+	 &quot;ID_DATE&quot; NVARCHAR(300),
+	 &quot;ID_WEEK&quot; NVARCHAR(300),
+	 &quot;ID_MONTH&quot; NVARCHAR(300),
+	 &quot;LAST_REPORTED&quot; NVARCHAR(300),
+	 &quot;LR_DATE&quot; NVARCHAR(300),
+	 &quot;LR_WEEK&quot; NVARCHAR(300),
+	 &quot;LR_MONTH&quot; NVARCHAR(300),
+	 &quot;C_MARKETING_NAME&quot; NVARCHAR(300),
+	 &quot;IS_12_MONTHS&quot; NVARCHAR(300),
+	 &quot;OWNERSHIP&quot; NVARCHAR(300),
+	 &quot;APP_ID&quot; NVARCHAR(300),
+	 &quot;APP_NAME&quot; NVARCHAR(300),
+	 &quot;APP_INSTALLED_DATE&quot; NVARCHAR(300),
+	 &quot;APP_ID_DATE&quot; NVARCHAR(300),
+	 &quot;APP_ID_WEEK&quot; NVARCHAR(300),
+	 &quot;APP_ID_MONTH&quot; NVARCHAR(300),
+	 &quot;APP_VERSION&quot; NVARCHAR(300)) UNLOAD PRIORITY 5 AUTO MERGE 
+
+---Création de la table MDM_HISTORISATION 
+(Attention la vue ci-dessous a été créée afin de filtrer les applications NON VE)  
+
+CREATE VIEW &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot; ( &quot;ID&quot;,
+	 &quot;DEVICE_ID&quot;,
+	 &quot;APP_ID&quot;,
+	 &quot;APP_NAME&quot;,
+	 &quot;INSTALLED_DATE&quot;,
+	 &quot;ID_DATE&quot;,
+	 &quot;ID_WEEK&quot;,
+	 &quot;ID_MONTH&quot;,
+	 &quot;APP_VERSION&quot; ) AS SELECT
+	 &quot;ID&quot;,
+	 &quot;DEVICE_ID&quot;,
+	 &quot;APP_ID&quot;,
+	 &quot;APP_NAME&quot;,
+	 &quot;INSTALLED_DATE&quot;,
+	 &quot;ID_DATE&quot;,
+	 &quot;ID_WEEK&quot;,
+	 &quot;ID_MONTH&quot;,
+	 &quot;APP_VERSION&quot; 
+FROM &quot;MOBILITY&quot;.&quot;MDM_APPLICATION&quot; 
+WHERE &quot;APP_NAME&quot;!='KO' 
+GROUP BY &quot;ID&quot;,
+	 &quot;DEVICE_ID&quot;,
+	 &quot;APP_ID&quot;,
+	 &quot;APP_NAME&quot;,
+	 &quot;INSTALLED_DATE&quot;,
+	 &quot;ID_DATE&quot;,
+	 &quot;ID_WEEK&quot;,
+	 &quot;ID_MONTH&quot;,
+	 &quot;APP_VERSION&quot; WITH READ ONLY
+*/
+
+/*
+On historise mois par mois les données. Le mois en cours est màj de façon journalière. 
+On delete les infos du mois et on recharge
+ */
+delete from  &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot; A
+where a.year=YEAR(NOW()) and a.month=MONTH(NOW());
+
+insert into &quot;BI_IT&quot;.&quot;MDM_HISTORISATION&quot;(
+/*Infos provenant de la table &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot;*/
+DATE,YEAR ,MONTH ,DAY,USERNAME ,UPN,ID,EMAIL,DEVICE_NAME,DEVICE_TYPE,DEVICE_MODEL,DEVICE_OS,DEVICE_ID,
+MANAGED_TYPE,PLATFORM,INSTALLED_DATE,ID_DATE,ID_WEEK,ID_MONTH,LAST_REPORTED,LR_DATE,LR_WEEK,LR_MONTH,OWNERSHIP,
+/*Infos provenant de la table &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot;*/
+APP_ID	,APP_NAME 	,APP_INSTALLED_DATE 	,APP_ID_DATE ,APP_ID_WEEK 	,APP_ID_MONTH ,APP_VERSION 	
+)
+(
+select
+NOW() as DATE,
+YEAR(NOW()) as YEAR,
+MONTH(NOW()) as MONTH,
+dayofmonth(now()) as DAY,
+/*Infos provenant de la table &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot;*/
+USERNAME ,UPN,
+a.ID,EMAIL,DEVICE_NAME,DEVICE_TYPE,DEVICE_MODEL,DEVICE_OS,a.DEVICE_ID,MANAGED_TYPE,PLATFORM,a.INSTALLED_DATE,
+a.ID_DATE,a.ID_WEEK,a.ID_MONTH,LAST_REPORTED,LR_DATE,LR_WEEK,LR_MONTH,OWNERSHIP,
+/*Infos provenant de la table &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot;*/
+APP_ID	,
+APP_NAME 	,
+b.INSTALLED_DATE 	,
+b.ID_DATE ,
+b.ID_WEEK 	,
+b.ID_MONTH ,
+APP_VERSION
+from &quot;MOBILITY&quot;.&quot;MDM_DEVICE&quot; a
+left outer join &quot;MOBILITY&quot;.&quot;VIEW_MDM_APPLICATION&quot; b on a.device_id=b.device_id
+);
+END;
+ /********* End Procedure Script ************/</definition>
+  <defaultSchema schemaName="SYSTEM"/>
+</UDE:Procedure>

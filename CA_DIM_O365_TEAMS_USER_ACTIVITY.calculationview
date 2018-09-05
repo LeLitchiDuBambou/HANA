@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_DIM_O365_TEAMS_USER_ACTIVITY" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="internal" calculationScenarioType="TREE_BASED" dataCategory="DIMENSION" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_DIM_O365_SKYPE_USER_ACTIVITY"/>
+  <metadata changedAt="2018-07-26 17:13:15.516"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="32"/>
+  <dataSources>
+    <DataSource id="O365USAGE_TEAMS_USER_ACTIVITY" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT_SOCIAL_AND_APPS" columnObjectName="O365USAGE_TEAMS_USER_ACTIVITY"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATASTR01"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="DATASTR02">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="true" value="False"/>
+        </viewAttribute>
+        <viewAttribute id="DATASTR03"/>
+        <viewAttribute id="DATANUM01"/>
+        <viewAttribute id="DATANUM02"/>
+        <viewAttribute id="DATANUM03"/>
+        <viewAttribute id="DATANUM04"/>
+        <viewAttribute id="DATADAT01"/>
+        <viewAttribute id="DATADAT02"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#O365USAGE_TEAMS_USER_ACTIVITY">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR01" source="DATASTR01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR02" source="DATASTR02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR03" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM01" source="DATANUM01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM02" source="DATANUM02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM03" source="DATANUM03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATANUM04" source="DATANUM04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT01" source="DATADAT01"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATADAT02" source="DATADAT02"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Projection_1">
+    <descriptions defaultDescription="CA_DIM_O365_SKYPE_USER_ACTIVITY"/>
+    <attributes>
+      <attribute id="DATASTR01_T" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User Principal Name"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR01"/>
+      </attribute>
+      <attribute id="DATE_T" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Execution Date "/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="DATASTR02_T" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Is Deleted"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR02"/>
+      </attribute>
+      <attribute id="DATASTR03_T" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Report Type"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATASTR03"/>
+      </attribute>
+      <attribute id="DATANUM01_T" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Team Chat Message Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM01"/>
+      </attribute>
+      <attribute id="DATANUM02_T" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Private Chat Message Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM02"/>
+      </attribute>
+      <attribute id="DATANUM03_T" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Call Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM03"/>
+      </attribute>
+      <attribute id="DATANUM04_T" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Meeting Count"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATANUM04"/>
+      </attribute>
+      <attribute id="DATADAT01_T" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Activity Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT01"/>
+      </attribute>
+      <attribute id="DATADAT02_T" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Deleted Date"/>
+        <keyMapping columnObjectName="Projection_1" columnName="DATADAT02"/>
+      </attribute>
+      <attribute id="YEAR_T" key="true" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="YEAR"/>
+        <keyMapping columnObjectName="Projection_1" columnName="YEAR"/>
+      </attribute>
+      <attribute id="MONTH_T" key="true" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MONTH"/>
+        <keyMapping columnObjectName="Projection_1" columnName="MONTH"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="USER_ACTIVITY_TEAMS" hidden="false" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User activity Teams"/>
+        <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;DATANUM01_T&quot;+&quot;DATANUM02_T&quot;+&quot;DATANUM03_T&quot;+&quot;DATANUM04_T&quot;</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures/>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="170"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

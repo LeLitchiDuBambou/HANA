@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" schemaVersion="2.3" id="CA_CUBE_NETWORK_FIREWALL" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_NETWORK_FIREWALL"/>
+  <metadata changedAt="2018-07-25 09:59:29.834"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="34"/>
+  <dataSources>
+    <DataSource id="NETWORK_FIREWALL_HISTORISATION" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="NETWORK_FIREWALL_HISTORISATION"/>
+    </DataSource>
+    <DataSource id="CA_DIM_NETWORK_SITES" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_NETWORK_SITES</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="FIREWALL">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="SYSID">
+          <filter xsi:type="AccessControl:SingleValueFilter" operator="NL" including="false"/>
+        </viewAttribute>
+        <viewAttribute id="MODELE"/>
+        <viewAttribute id="IP_MGT"/>
+        <viewAttribute id="ZSCALER_LOCATION_DECLAREE"/>
+        <viewAttribute id="ZSCALER_COMMENTAIRE"/>
+        <viewAttribute id="TYPE_ZSCALER"/>
+        <viewAttribute id="NOM_PAC"/>
+        <viewAttribute id="IP_NŒUD_ZSCALER_SECONDAIRE"/>
+        <viewAttribute id="BACKUP"/>
+        <viewAttribute id="TEMPLATE_BACKUP"/>
+        <viewAttribute id="URL_FW"/>
+        <viewAttribute id="GROUPWEBFILTERING"/>
+        <viewAttribute id="WEBFILTERING"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="IP_NŒUD_ZSCALER_PRIMAIRE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="PERIODE" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#NETWORK_FIREWALL_HISTORISATION">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYSID" source="SYSID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODELE" source="MODELE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_MGT" source="IP_MGT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ZSCALER_LOCATION_DECLAREE" source="ZSCALER_LOCATION_DECLAREE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ZSCALER_COMMENTAIRE" source="ZSCALER_COMMENTAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE_ZSCALER" source="TYPE_ZSCALER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NOM_PAC" source="NOM_PAC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_NŒUD_ZSCALER_SECONDAIRE" source="IP_NŒUD_ZSCALER_SECONDAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BACKUP" source="BACKUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEMPLATE_BACKUP" source="TEMPLATE_BACKUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="URL_FW" source="URL_FW"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPWEBFILTERING" source="GROUPWEBFILTERING"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="WEBFILTERING" source="WEBFILTERING"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_NŒUD_ZSCALER_PRIMAIRE" source="IP_NŒUD_ZSCALER_PRIMAIRE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="SITES" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="CN"/>
+        <viewAttribute id="SYSID"/>
+        <viewAttribute id="MODELE"/>
+        <viewAttribute id="IP_MGT"/>
+        <viewAttribute id="ZSCALER_LOCATION_DECLAREE"/>
+        <viewAttribute id="ZSCALER_COMMENTAIRE"/>
+        <viewAttribute id="TYPE_ZSCALER"/>
+        <viewAttribute id="NOM_PAC"/>
+        <viewAttribute id="IP_NŒUD_ZSCALER_SECONDAIRE"/>
+        <viewAttribute id="BACKUP"/>
+        <viewAttribute id="TEMPLATE_BACKUP"/>
+        <viewAttribute id="URL_FW"/>
+        <viewAttribute id="GROUPWEBFILTERING"/>
+        <viewAttribute id="WEBFILTERING"/>
+        <viewAttribute id="CODE_SITE"/>
+        <viewAttribute id="DHCP"/>
+        <viewAttribute id="ADRESSE_GATEWAY"/>
+        <viewAttribute id="CONTACT"/>
+        <viewAttribute id="TEL"/>
+        <viewAttribute id="EMAIL"/>
+        <viewAttribute id="ADRESSE"/>
+        <viewAttribute id="CP"/>
+        <viewAttribute id="VILLE"/>
+        <viewAttribute id="PAYS"/>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="IP_NŒUD_ZSCALER_PRIMAIRE"/>
+        <viewAttribute id="ID_ENTRE"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#FIREWALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYSID" source="SYSID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MODELE" source="MODELE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_MGT" source="IP_MGT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ZSCALER_LOCATION_DECLAREE" source="ZSCALER_LOCATION_DECLAREE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ZSCALER_COMMENTAIRE" source="ZSCALER_COMMENTAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TYPE_ZSCALER" source="TYPE_ZSCALER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NOM_PAC" source="NOM_PAC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_NŒUD_ZSCALER_SECONDAIRE" source="IP_NŒUD_ZSCALER_SECONDAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BACKUP" source="BACKUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEMPLATE_BACKUP" source="TEMPLATE_BACKUP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="URL_FW" source="URL_FW"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPWEBFILTERING" source="GROUPWEBFILTERING"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="WEBFILTERING" source="WEBFILTERING"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IP_NŒUD_ZSCALER_PRIMAIRE" source="IP_NŒUD_ZSCALER_PRIMAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+      <input node="#CA_DIM_NETWORK_SITES">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CODE_SITE" source="CODE_SITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DHCP" source="DHCP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE_GATEWAY" source="ADRESSE_GATEWAY"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT" source="CONTACT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TEL" source="TEL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="EMAIL" source="EMAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ADRESSE" source="ADRESSE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CP" source="CP"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="VILLE" source="VILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PAYS" source="PAYS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ENTRE" source="ID_ENTRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CN" source="CN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+      </input>
+      <joinAttribute name="CN"/>
+      <joinAttribute name="PERIODE"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="SITES">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="SITES" columnName="DATE"/>
+      </attribute>
+      <attribute id="PERIODE" hidden="false" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="SITES" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="SITES" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU Country"/>
+        <keyMapping columnObjectName="SITES" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="SITES" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="SITES" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="SITES" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="SITES" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="SITES" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="CN" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="CN"/>
+        <keyMapping columnObjectName="SITES" columnName="CN"/>
+      </attribute>
+      <attribute id="SYSID" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="SysID"/>
+        <keyMapping columnObjectName="SITES" columnName="SYSID"/>
+      </attribute>
+      <attribute id="MODELE" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Model"/>
+        <keyMapping columnObjectName="SITES" columnName="MODELE"/>
+      </attribute>
+      <attribute id="IP_MGT" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="IP MGT"/>
+        <keyMapping columnObjectName="SITES" columnName="IP_MGT"/>
+      </attribute>
+      <attribute id="ZSCALER_LOCATION_DECLAREE" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Zscaler location declared"/>
+        <keyMapping columnObjectName="SITES" columnName="ZSCALER_LOCATION_DECLAREE"/>
+      </attribute>
+      <attribute id="ZSCALER_COMMENTAIRE" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Zscaler comment"/>
+        <keyMapping columnObjectName="SITES" columnName="ZSCALER_COMMENTAIRE"/>
+      </attribute>
+      <attribute id="TYPE_ZSCALER" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Zscaler type"/>
+        <keyMapping columnObjectName="SITES" columnName="TYPE_ZSCALER"/>
+      </attribute>
+      <attribute id="NOM_PAC" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="PAC name"/>
+        <keyMapping columnObjectName="SITES" columnName="NOM_PAC"/>
+      </attribute>
+      <attribute id="IP_NŒUD_ZSCALER_SECONDAIRE" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Secondary IP node Zscaler"/>
+        <keyMapping columnObjectName="SITES" columnName="IP_NŒUD_ZSCALER_SECONDAIRE"/>
+      </attribute>
+      <attribute id="IP_NŒUD_ZSCALER_PRIMAIRE" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Primary IP node Zscaler"/>
+        <keyMapping columnObjectName="SITES" columnName="IP_NŒUD_ZSCALER_PRIMAIRE"/>
+      </attribute>
+      <attribute id="BACKUP" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Backup"/>
+        <keyMapping columnObjectName="SITES" columnName="BACKUP"/>
+      </attribute>
+      <attribute id="TEMPLATE_BACKUP" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Template backup"/>
+        <keyMapping columnObjectName="SITES" columnName="TEMPLATE_BACKUP"/>
+      </attribute>
+      <attribute id="URL_FW" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="URL FW"/>
+        <keyMapping columnObjectName="SITES" columnName="URL_FW"/>
+      </attribute>
+      <attribute id="GROUPWEBFILTERING" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group webfiltering"/>
+        <keyMapping columnObjectName="SITES" columnName="GROUPWEBFILTERING"/>
+      </attribute>
+      <attribute id="WEBFILTERING" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Web filtering"/>
+        <keyMapping columnObjectName="SITES" columnName="WEBFILTERING"/>
+      </attribute>
+      <attribute id="CODE_SITE" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Code site"/>
+        <keyMapping columnObjectName="SITES" columnName="CODE_SITE"/>
+      </attribute>
+      <attribute id="DHCP" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="DHCP"/>
+        <keyMapping columnObjectName="SITES" columnName="DHCP"/>
+      </attribute>
+      <attribute id="ADRESSE_GATEWAY" order="27" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Gateway address"/>
+        <keyMapping columnObjectName="SITES" columnName="ADRESSE_GATEWAY"/>
+      </attribute>
+      <attribute id="CONTACT" order="28" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Contact"/>
+        <keyMapping columnObjectName="SITES" columnName="CONTACT"/>
+      </attribute>
+      <attribute id="TEL" order="29" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Tel"/>
+        <keyMapping columnObjectName="SITES" columnName="TEL"/>
+      </attribute>
+      <attribute id="EMAIL" order="30" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Email"/>
+        <keyMapping columnObjectName="SITES" columnName="EMAIL"/>
+      </attribute>
+      <attribute id="ADRESSE" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Address"/>
+        <keyMapping columnObjectName="SITES" columnName="ADRESSE"/>
+      </attribute>
+      <attribute id="CP" order="32" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ZIP code"/>
+        <keyMapping columnObjectName="SITES" columnName="CP"/>
+      </attribute>
+      <attribute id="VILLE" order="33" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="City"/>
+        <keyMapping columnObjectName="SITES" columnName="VILLE"/>
+      </attribute>
+      <attribute id="PAYS" order="34" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="SITES" columnName="PAYS"/>
+      </attribute>
+      <attribute id="ID_ENTRE" hidden="true" order="40" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Bu ID ROC"/>
+        <keyMapping columnObjectName="SITES" columnName="ID_ENTRE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="SYSID_1" hidden="true" order="37" aggregationType="sum" engineAggregation="count" measureType="simple">
+        <descriptions defaultDescription="SYSID_1"/>
+        <measureMapping columnObjectName="SITES" columnName="SYSID"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_SITES" hidden="false" order="35" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Sites"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="CN"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+      <measure id="NB_FIREWALL" hidden="false" order="36" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Firewall"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="SYSID"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures>
+      <measure id="NB_BACKUPE" hidden="false" order="38" engineAggregation="count" baseMeasure="#SYSID_1" restrictionExpressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Backup"/>
+        <restrictionExpression>(&quot;BACKUP&quot; = 'Validé' OR &quot;BACKUP&quot; = 'validé')</restrictionExpression>
+      </measure>
+      <measure id="NB_ZSCALER" hidden="false" order="39" engineAggregation="count" baseMeasure="#SYSID_1">
+        <descriptions defaultDescription="Zscaler"/>
+        <restriction logicalOperator="AND">
+          <filter xsi:type="Privilege:AttributeFilter" attributeName="ZSCALER_LOCATION_DECLAREE">
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OK"/>
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="OUI"/>
+            <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Ok"/>
+          </filter>
+          <attributeName>ZSCALER_LOCATION_DECLAREE</attributeName>
+        </restriction>
+      </measure>
+    </restrictedMeasures>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="FIREWALL" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="60" y="340"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="SITES" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="60" y="230"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

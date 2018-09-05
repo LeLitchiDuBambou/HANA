@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CA_LIEN_ANNUAIRE_MAILBOX" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_LIEN_ANNUAIRE_MAILBOX"/>
+  <metadata changedAt="2018-07-27 09:15:09.052"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="36"/>
+  <dataSources>
+    <DataSource id="CA_ANNUAIRE_PERS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT_SOCIAL_AND_APPS/calculationviews/CA_ANNUAIRE_PERS</resourceUri>
+    </DataSource>
+    <DataSource id="CA_DIM_MAILBOX_ALL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_MAILBOX_ALL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="DATE">
+          <filter xsi:type="AccessControl:SingleValueFilter" operator="GT" including="true" value="2018-01-01"/>
+        </viewAttribute>
+        <viewAttribute id="ID_ROC_PERS"/>
+        <viewAttribute id="JOB_TITLE"/>
+        <viewAttribute id="ANNUAIRE_FILIERE"/>
+        <viewAttribute id="ANNUAIRE_ACTIVITE"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="UPN_WITHOUT_MAJ" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>lower(&quot;UPN&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#CA_ANNUAIRE_PERS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ROC_PERS" source="ID_ROC_PERS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_FILIERE" source="ANNUAIRE_FILIERE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_ACTIVITE" source="ANNUAIRE_ACTIVITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="UPN_MAILBOX"/>
+        <viewAttribute id="LICENCE_MAILBOX"/>
+        <viewAttribute id="YEAR"/>
+        <viewAttribute id="MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="UPN_WITHOUT_MAJ" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>lower(&quot;UPN_MAILBOX&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#CA_DIM_MAILBOX_ALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN_MAILBOX" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LICENCE_MAILBOX" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="LICENCE_MAILBOX"/>
+        <viewAttribute id="ID_ROC_PERS"/>
+        <viewAttribute id="JOB_TITLE"/>
+        <viewAttribute id="ANNUAIRE_FILIERE"/>
+        <viewAttribute id="ANNUAIRE_ACTIVITE"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute hidden="true" id="JOIN$YEAR$YEAR"/>
+        <viewAttribute hidden="true" id="JOIN$MONTH$MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ROC_PERS" source="ID_ROC_PERS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_FILIERE" source="ANNUAIRE_FILIERE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_ACTIVITE" source="ANNUAIRE_ACTIVITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$YEAR$YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      </input>
+      <input node="#Aggregation_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="LICENCE_MAILBOX" source="LICENCE_MAILBOX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN_MAILBOX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$YEAR$YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      </input>
+      <joinAttribute name="UPN"/>
+      <joinAttribute name="JOIN$YEAR$YEAR"/>
+      <joinAttribute name="JOIN$MONTH$MONTH"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="CONNECTED_WORKER">
+      <descriptions defaultDescription="Connected worker"/>
+      <viewAttributes>
+        <viewAttribute id="PERIODE"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="LICENCE_MAILBOX"/>
+        <viewAttribute id="ID_ROC_PERS"/>
+        <viewAttribute id="JOB_TITLE"/>
+        <viewAttribute id="ANNUAIRE_FILIERE"/>
+        <viewAttribute id="ANNUAIRE_ACTIVITE"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="VARCHAR" id="CONNECTED_WORKER" length="100" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(isnull(&quot;LICENCE_MAILBOX&quot;),'No mailbox',&quot;LICENCE_MAILBOX&quot;)</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERIODE" source="PERIODE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LICENCE_MAILBOX" source="LICENCE_MAILBOX"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ID_ROC_PERS" source="ID_ROC_PERS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOB_TITLE" source="JOB_TITLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_FILIERE" source="ANNUAIRE_FILIERE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNUAIRE_ACTIVITE" source="ANNUAIRE_ACTIVITE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="CONNECTED_WORKER">
+    <descriptions/>
+    <attributes>
+      <attribute id="DATE" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription=" Date"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="DATE"/>
+      </attribute>
+      <attribute id="PERIODE" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="PERIODE"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="7" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business unit"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="9" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Country"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="UPN" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="UPN"/>
+      </attribute>
+      <attribute id="LICENCE_MAILBOX" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mailbox license"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="LICENCE_MAILBOX"/>
+      </attribute>
+      <attribute id="ANNUAIRE_ACTIVITE" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Activity"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="ANNUAIRE_ACTIVITE"/>
+      </attribute>
+      <attribute id="ANNUAIRE_FILIERE" order="13" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Job family"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="ANNUAIRE_FILIERE"/>
+      </attribute>
+      <attribute id="JOB_TITLE" order="14" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Job title"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="JOB_TITLE"/>
+      </attribute>
+      <attribute id="ID_ROC_PERS" order="15" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Id ROC"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="ID_ROC_PERS"/>
+      </attribute>
+      <attribute id="CONNECTED_WORKER" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Connected worker"/>
+        <keyMapping columnObjectName="CONNECTED_WORKER" columnName="CONNECTED_WORKER"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes/>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures/>
+    <calculatedMeasures>
+      <measure id="NB_PEOPLE" hidden="false" order="17" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Nber of users"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="ID_ROC_PERS"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#GROUPE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#GROUPE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#GROUPE_LIBELLE"/>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="6" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="99" y="87"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="22" y="339"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="176" y="339"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="243"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="CONNECTED_WORKER" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="99" y="165"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

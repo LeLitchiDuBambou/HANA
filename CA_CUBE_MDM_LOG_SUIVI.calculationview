@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" schemaVersion="2.3" id="CA_CUBE_MDM_LOG_SUIVI" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_MDM_LOG_SUIVI"/>
+  <metadata changedAt="2018-08-10 15:29:24.784"/>
+  <localVariables/>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="40"/>
+  <dataSources>
+    <DataSource id="CA_DIM_ORGA_PERSONNE_ENCOURS" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/roc-new/calculationviews/CA_DIM_ORGA_PERSONNE_ENCOURS</resourceUri>
+    </DataSource>
+    <DataSource id="VIEW_LOG_SUIVI" type="DATA_BASE_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="MOBILITY" columnObjectName="VIEW_LOG_SUIVI"/>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="PERSONNE_UPN"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#CA_DIM_ORGA_PERSONNE_ENCOURS">
+        <mapping xsi:type="Calculation:AttributeMapping" target="PERSONNE_UPN" source="PERSONNE_UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="USER_ID">
+          <filter xsi:type="AccessControl:SingleValueFilter" including="false" value=""/>
+        </viewAttribute>
+        <viewAttribute id="PREFERRED_LANGUAGE"/>
+        <viewAttribute id="SOURCE_SCREEN"/>
+        <viewAttribute id="TARGET_SCREEN"/>
+        <viewAttribute id="DEVICE_ID"/>
+        <viewAttribute id="SYSTEM_LANGUAGE"/>
+        <viewAttribute id="LOCATION"/>
+        <viewAttribute id="APP_NAME"/>
+        <viewAttribute id="APP_VERSION"/>
+        <viewAttribute id="ANNEE"/>
+        <viewAttribute id="MOIS"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="NEW_USER"/>
+        <viewAttribute id="NEW_SESSION"/>
+        <viewAttribute id="CONNECTED"/>
+        <viewAttribute id="DEVICE_OS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#VIEW_LOG_SUIVI">
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ID" source="USER_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PREFERRED_LANGUAGE" source="PREFERRED_LANGUAGE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE_SCREEN" source="SOURCE_SCREEN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TARGET_SCREEN" source="TARGET_SCREEN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_ID" source="DEVICE_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYSTEM_LANGUAGE" source="SYSTEM_LANGUAGE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_VERSION" source="APP_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNEE" source="ANNEE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOIS" source="MOIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NEW_USER" source="NEW_USER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NEW_SESSION" source="NEW_SESSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONNECTED" source="CONNECTED"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_OS" source="DEVICE_OS"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" dynamic="false" joinType="leftOuter">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="USER_ID"/>
+        <viewAttribute id="PREFERRED_LANGUAGE"/>
+        <viewAttribute id="SOURCE_SCREEN"/>
+        <viewAttribute id="TARGET_SCREEN"/>
+        <viewAttribute id="DEVICE_ID"/>
+        <viewAttribute id="SYSTEM_LANGUAGE"/>
+        <viewAttribute id="LOCATION"/>
+        <viewAttribute id="APP_NAME"/>
+        <viewAttribute id="APP_VERSION"/>
+        <viewAttribute id="ANNEE"/>
+        <viewAttribute id="MOIS"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="NEW_USER"/>
+        <viewAttribute id="NEW_SESSION"/>
+        <viewAttribute id="CONNECTED"/>
+        <viewAttribute id="DEVICE_OS"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Projection_2">
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ID" source="USER_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PREFERRED_LANGUAGE" source="PREFERRED_LANGUAGE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOURCE_SCREEN" source="SOURCE_SCREEN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TARGET_SCREEN" source="TARGET_SCREEN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_ID" source="DEVICE_ID"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYSTEM_LANGUAGE" source="SYSTEM_LANGUAGE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="LOCATION" source="LOCATION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_NAME" source="APP_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="APP_VERSION" source="APP_VERSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ANNEE" source="ANNEE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MOIS" source="MOIS"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NEW_USER" source="NEW_USER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NEW_SESSION" source="NEW_SESSION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="CONNECTED" source="CONNECTED"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DEVICE_OS" source="DEVICE_OS"/>
+      </input>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="USER_ID" source="PERSONNE_UPN"/>
+      </input>
+      <joinAttribute name="USER_ID"/>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Join_1">
+    <descriptions/>
+    <attributes>
+      <attribute id="USER_ID" order="1" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="User ID"/>
+        <keyMapping columnObjectName="Join_1" columnName="USER_ID"/>
+      </attribute>
+      <attribute id="PREFERRED_LANGUAGE" order="2" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Preferred language"/>
+        <keyMapping columnObjectName="Join_1" columnName="PREFERRED_LANGUAGE"/>
+      </attribute>
+      <attribute id="SOURCE_SCREEN" order="3" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="source screen"/>
+        <keyMapping columnObjectName="Join_1" columnName="SOURCE_SCREEN"/>
+      </attribute>
+      <attribute id="TARGET_SCREEN" order="4" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Target screen"/>
+        <keyMapping columnObjectName="Join_1" columnName="TARGET_SCREEN"/>
+      </attribute>
+      <attribute id="DEVICE_ID" order="5" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Device ID"/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_ID"/>
+      </attribute>
+      <attribute id="SYSTEM_LANGUAGE" order="6" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="System language"/>
+        <keyMapping columnObjectName="Join_1" columnName="SYSTEM_LANGUAGE"/>
+      </attribute>
+      <attribute id="LOCATION" order="7" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="LOCATION"/>
+        <keyMapping columnObjectName="Join_1" columnName="LOCATION"/>
+      </attribute>
+      <attribute id="APP_NAME" order="8" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="App name"/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_NAME"/>
+      </attribute>
+      <attribute id="APP_VERSION" order="9" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="App version"/>
+        <keyMapping columnObjectName="Join_1" columnName="APP_VERSION"/>
+      </attribute>
+      <attribute id="ANNEE" order="10" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="ANNEE"/>
+        <keyMapping columnObjectName="Join_1" columnName="ANNEE"/>
+      </attribute>
+      <attribute id="MOIS" order="11" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="MOIS"/>
+        <keyMapping columnObjectName="Join_1" columnName="MOIS"/>
+      </attribute>
+      <attribute id="DATE" order="12" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="Join_1" columnName="DATE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="16" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="Join_1" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="17" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU Country"/>
+        <keyMapping columnObjectName="Join_1" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="18" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="Join_1" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="19" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="Join_1" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="20" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="Join_1" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="DEVICE_OS" order="23" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions/>
+        <keyMapping columnObjectName="Join_1" columnName="DEVICE_OS"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PLATFORM" hidden="false" order="24" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Platform"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>leftstr(&quot;DEVICE_OS&quot;,instr(&quot;DEVICE_OS&quot;,'_')-1)&#xD;
+</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="NEW_USER" order="13" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="New users"/>
+        <measureMapping columnObjectName="Join_1" columnName="NEW_USER"/>
+      </measure>
+      <measure id="NEW_SESSION" order="14" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="New sessions"/>
+        <measureMapping columnObjectName="Join_1" columnName="NEW_SESSION"/>
+      </measure>
+      <measure id="CONNECTED" order="15" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Connected"/>
+        <measureMapping columnObjectName="Join_1" columnName="CONNECTED"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_PEOPLE" hidden="false" order="21" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="People"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="USER_ID"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+      <measure id="NB_DEVICE" hidden="false" order="22" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Devices"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="DEVICE_ID"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions>
+      <localDimension id="HIERARCHY_1">
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIVISION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#POLE_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_PAYS_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#DIRECTION_LIBELLE</attributeRef>
+        <attributeRef xsi:type="DataFoundation:Attribute">#ENTREPRISE_LIBELLE</attributeRef>
+        <hierarchies>
+          <hierarchy xsi:type="Dimension:LeveledHierarchy" id="HIERARCHY_1" aggregateAllNodes="true" rootNodeVisibility="ADD_ROOT_NODE" withRootNode="true" nodeStyle="NAME_ONLY">
+            <descriptions defaultDescription="Organisation"/>
+            <levels>
+              <level levelAttribute="#DIVISION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="1" orderAttribute="#DIVISION_LIBELLE"/>
+              <level levelAttribute="#POLE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="2" orderAttribute="#POLE_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_PAYS_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="3" orderAttribute="#ENTREPRISE_PAYS_LIBELLE"/>
+              <level levelAttribute="#DIRECTION_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="4" orderAttribute="#DIRECTION_LIBELLE"/>
+              <level levelAttribute="#ENTREPRISE_LIBELLE" levelType="MDLEVEL_TYPE_REGULAR" order="5" orderAttribute="#ENTREPRISE_LIBELLE"/>
+            </levels>
+          </hierarchy>
+        </hierarchies>
+      </localDimension>
+    </localDimensions>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="355"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="240" y="280"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="180"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>

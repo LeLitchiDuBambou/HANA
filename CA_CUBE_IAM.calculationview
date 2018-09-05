@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" schemaVersion="2.3" id="CA_CUBE_IAM" applyPrivilegeType="ANALYTIC_PRIVILEGE" checkAnalyticPrivileges="true" defaultClient="$$client$$" defaultLanguage="$$language$$" hierarchiesSQLEnabled="false" translationRelevant="true" visibility="reportingEnabled" calculationScenarioType="TREE_BASED" dataCategory="CUBE" enforceSqlExecution="false" executionSemantic="UNDEFINED" outputViewType="Aggregation">
+  <origin/>
+  <descriptions defaultDescription="CA_CUBE_IAM"/>
+  <metadata changedAt="2018-07-27 11:00:59.445"/>
+  <localVariables>
+    <variable id="Secret_Question_Compliance" parameter="true">
+      <descriptions defaultDescription="Secret Question Answered ?"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="Checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="Unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Last_Connection_Compliance" parameter="true">
+      <descriptions defaultDescription="Last Connection less than 3 month ?"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="Checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="Unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Managed_Generic_Compliance" parameter="true">
+      <descriptions defaultDescription="Managed Generic Account ?"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="Checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="Unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+    <variable id="Licence_Compliance" parameter="true">
+      <descriptions defaultDescription="Licence Compliant ?"/>
+      <variableProperties datatype="NVARCHAR" defaultValue="checked" length="10" mandatory="false">
+        <valueDomain type="StaticList">
+          <listEntry id="checked">
+            <descriptions defaultDescription="Checked"/>
+          </listEntry>
+          <listEntry id="unchecked">
+            <descriptions defaultDescription="Unchecked"/>
+          </listEntry>
+        </valueDomain>
+        <selection multiLine="false" type="SingleValue"/>
+      </variableProperties>
+    </variable>
+  </localVariables>
+  <variableMappings/>
+  <informationModelLayout relativeWidthScenario="19"/>
+  <dataSources>
+    <DataSource id="IAM" type="DATA_BASE_TABLE">
+      <viewAttributes allViewAttributes="true"/>
+      <columnObject schemaName="BI_IT" columnObjectName="IAM"/>
+    </DataSource>
+    <DataSource id="CA_DIM_MAILBOX_ALL" type="CALCULATION_VIEW">
+      <viewAttributes allViewAttributes="true"/>
+      <resourceUri>/BI_IT/calculationviews/CA_DIM_MAILBOX_ALL</resourceUri>
+    </DataSource>
+  </dataSources>
+  <calculationViews>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="DATE"/>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="IDROC"/>
+        <viewAttribute id="ACTIF_ANNUAIRE"/>
+        <viewAttribute id="MANAGED_ACCOUNT"/>
+        <viewAttribute id="GENERIC"/>
+        <viewAttribute id="BOX_TYPE"/>
+        <viewAttribute id="MAIL"/>
+        <viewAttribute id="MANAGER"/>
+        <viewAttribute id="QR_NON_RENSEIGNES"/>
+        <viewAttribute id="PWD_CHANGED_TIME"/>
+        <viewAttribute id="COMPTE_DESACTIVE"/>
+        <viewAttribute id="DATE_DERNIERE_CONNEXION_AD"/>
+        <viewAttribute id="COMPTE_VERROUILLE"/>
+        <viewAttribute id="SYS_TIME_SOURCE_IAM"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="INTEGER" id="YEAR" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'YYYY')</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="MONTH" expressionLanguage="COLUMN_ENGINE">
+          <formula>format(&quot;DATE&quot;,'MM')</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#IAM">
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="IDROC" source="IDROC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ACTIF_ANNUAIRE" source="ACTIF_ANNUAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANAGED_ACCOUNT" source="MANAGED_ACCOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GENERIC" source="GENERIC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BOX_TYPE" source="BOX_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAIL" source="MAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANAGER" source="MANAGER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QR_NON_RENSEIGNES" source="QR_NON_RENSEIGNES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="PWD_CHANGED_TIME" source="PWD_CHANGED_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COMPTE_DESACTIVE" source="COMPTE_DESACTIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DERNIERE_CONNEXION_AD" source="DATE_DERNIERE_CONNEXION_AD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="COMPTE_VERROUILLE" source="COMPTE_VERROUILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE_IAM" source="SYS_TIME_SOURCE_IAM"/>
+      </input>
+    </calculationView>
+    <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="UPN_MANAGER"/>
+        <viewAttribute id="MANAGED_ACCOUNT"/>
+        <viewAttribute id="BOX_TYPE"/>
+        <viewAttribute id="MAIL"/>
+        <viewAttribute id="DATE_PWD_CHANGED"/>
+        <viewAttribute id="DATE_DERNIERE_CONNEXION_AD"/>
+        <viewAttribute id="FLAG_GENERIC"/>
+        <viewAttribute id="FLAG_ACTIF_ANNUAIRE"/>
+        <viewAttribute id="FLAG_QR_NON_RENSEIGNES"/>
+        <viewAttribute id="FLAG_COMPTE_DESACTIVE"/>
+        <viewAttribute id="FLAG_COMPTE_VERROUILLE"/>
+        <viewAttribute id="MAILBOX_LICENCE"/>
+        <viewAttribute id="MAILBOX_COLOR"/>
+        <viewAttribute id="MAILBOX_DISPLAY_NAME"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="DATASTR06"/>
+        <viewAttribute id="SYS_TIME_SOURCE_IAM"/>
+        <viewAttribute id="DATE"/>
+        <viewAttribute hidden="true" id="JOIN$YEAR$YEAR"/>
+        <viewAttribute hidden="true" id="JOIN$MONTH$MONTH"/>
+      </viewAttributes>
+      <calculatedViewAttributes>
+        <calculatedViewAttribute datatype="INTEGER" id="TOP_GRADE" expressionLanguage="COLUMN_ENGINE">
+          <formula>if('$$Secret_Question_Compliance$$' = 'checked' and &quot;QUALITY_SECRET_QUESTION&quot; != 'N/A', 1, 0) +&#xD;
+if('$$Last_Connection_Compliance$$' = 'checked', 1, 0) +&#xD;
+if('$$Managed_Generic_Compliance$$' = 'checked' and &quot;QUALITY_MANAGED_GENERIC&quot; != 'N/A', 1, 0) +&#xD;
+if('$$Licence_Compliance$$' = 'checked', 1, 0)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="QUALITY_SECRET_QUESTION" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(&quot;MAILBOX_COLOR&quot; != 'green',&#xD;
+'N/A',&#xD;
+if(&quot;FLAG_QR_NON_RENSEIGNES&quot; = 'TRUE', 'NOK', 'OK'))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="QUALITY_LICENCE" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(in(&quot;MAILBOX_COLOR&quot;, 'green', 'blue'),&#xD;
+if(in(&quot;MAILBOX_LICENCE&quot;, 'K', 'E1', 'E3'), 'OK', 'NOK'),&#xD;
+if(isnull(&quot;MAILBOX_LICENCE&quot;), 'OK', 'NOK'))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="QUALITY_MANAGED_GENERIC" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(in(&quot;MAILBOX_COLOR&quot;, 'blue', 'yellow'),&#xD;
+if(isnull(&quot;UPN_MANAGER&quot;), 'NOK', 'OK'),&#xD;
+'N/A')</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="VARCHAR" id="QUALITY_LAST_AD_CONNECTION" length="10" expressionLanguage="COLUMN_ENGINE">
+          <formula>if(isnull(&quot;DATE_DERNIERE_CONNEXION_AD&quot;),&#xD;
+'NOK',&#xD;
+if(daysbetween(&quot;DATE_DERNIERE_CONNEXION_AD&quot;,&quot;SYS_TIME_SOURCE_IAM&quot;) > 90, 'NOK', 'OK'))</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="OK_COMPLIANCE" expressionLanguage="COLUMN_ENGINE">
+          <formula>if('$$Secret_Question_Compliance$$' = 'checked', if(&quot;QUALITY_SECRET_QUESTION&quot; = 'OK', 1, 0), 0) +&#xD;
+if('$$Last_Connection_Compliance$$' = 'checked', if(&quot;QUALITY_LAST_AD_CONNECTION&quot; = 'OK', 1, 0), 0) +&#xD;
+if('$$Managed_Generic_Compliance$$' = 'checked', if(&quot;QUALITY_MANAGED_GENERIC&quot; = 'OK', 1, 0), 0) +&#xD;
+if('$$Licence_Compliance$$' = 'checked', if(&quot;QUALITY_LICENCE&quot; = 'OK', 1, 0), 0)</formula>
+        </calculatedViewAttribute>
+        <calculatedViewAttribute datatype="INTEGER" id="NOK_COMPLIANCE" expressionLanguage="COLUMN_ENGINE">
+          <formula>&quot;TOP_GRADE&quot; - &quot;OK_COMPLIANCE&quot;</formula>
+        </calculatedViewAttribute>
+      </calculatedViewAttributes>
+      <input node="#Projection_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN_MANAGER" source="MANAGER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANAGED_ACCOUNT" source="MANAGED_ACCOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BOX_TYPE" source="BOX_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAIL" source="MAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_PWD_CHANGED" source="PWD_CHANGED_TIME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DERNIERE_CONNEXION_AD" source="DATE_DERNIERE_CONNEXION_AD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_GENERIC" source="GENERIC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_ACTIF_ANNUAIRE" source="ACTIF_ANNUAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_QR_NON_RENSEIGNES" source="QR_NON_RENSEIGNES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_COMPTE_DESACTIVE" source="COMPTE_DESACTIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_COMPTE_VERROUILLE" source="COMPTE_VERROUILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SYS_TIME_SOURCE_IAM" source="SYS_TIME_SOURCE_IAM"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$YEAR$YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      </input>
+      <input node="#CA_DIM_MAILBOX_ALL">
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_LICENCE" source="DATASTR03"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_COLOR" source="DATASTR04"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_DISPLAY_NAME" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATASTR06" source="DATASTR06"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="DATASTR05"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$YEAR$YEAR" source="YEAR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MONTH$MONTH" source="MONTH"/>
+      </input>
+      <joinAttribute name="UPN"/>
+      <joinAttribute name="JOIN$YEAR$YEAR"/>
+      <joinAttribute name="JOIN$MONTH$MONTH"/>
+    </calculationView>
+    <calculationView xsi:type="Calculation:ProjectionView" id="Filtre_Colors" filterExpressionLanguage="COLUMN_ENGINE">
+      <descriptions/>
+      <viewAttributes>
+        <viewAttribute id="UPN"/>
+        <viewAttribute id="UPN_MANAGER"/>
+        <viewAttribute id="MANAGED_ACCOUNT"/>
+        <viewAttribute id="BOX_TYPE"/>
+        <viewAttribute id="MAIL"/>
+        <viewAttribute id="DATE_PWD_CHANGED"/>
+        <viewAttribute id="DATE_DERNIERE_CONNEXION_AD"/>
+        <viewAttribute id="FLAG_GENERIC"/>
+        <viewAttribute id="FLAG_ACTIF_ANNUAIRE"/>
+        <viewAttribute id="FLAG_QR_NON_RENSEIGNES"/>
+        <viewAttribute id="FLAG_COMPTE_DESACTIVE"/>
+        <viewAttribute id="FLAG_COMPTE_VERROUILLE"/>
+        <viewAttribute id="MAILBOX_LICENCE"/>
+        <viewAttribute id="MAILBOX_COLOR"/>
+        <viewAttribute id="MAILBOX_DISPLAY_NAME"/>
+        <viewAttribute id="GROUPE_LIBELLE"/>
+        <viewAttribute id="DIVISION_LIBELLE"/>
+        <viewAttribute id="POLE_LIBELLE"/>
+        <viewAttribute id="DIRECTION_LIBELLE"/>
+        <viewAttribute id="SOCIETE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_LIBELLE"/>
+        <viewAttribute id="ENTREPRISE_PAYS_LIBELLE"/>
+        <viewAttribute id="QUALITY_SECRET_QUESTION"/>
+        <viewAttribute id="QUALITY_LICENCE"/>
+        <viewAttribute id="QUALITY_MANAGED_GENERIC"/>
+        <viewAttribute id="QUALITY_LAST_AD_CONNECTION"/>
+        <viewAttribute id="TOP_GRADE"/>
+        <viewAttribute id="OK_COMPLIANCE"/>
+        <viewAttribute id="NOK_COMPLIANCE"/>
+        <viewAttribute id="DATE"/>
+      </viewAttributes>
+      <calculatedViewAttributes/>
+      <input node="#Join_1">
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN" source="UPN"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="UPN_MANAGER" source="UPN_MANAGER"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MANAGED_ACCOUNT" source="MANAGED_ACCOUNT"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="BOX_TYPE" source="BOX_TYPE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAIL" source="MAIL"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_PWD_CHANGED" source="DATE_PWD_CHANGED"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE_DERNIERE_CONNEXION_AD" source="DATE_DERNIERE_CONNEXION_AD"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_GENERIC" source="FLAG_GENERIC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_ACTIF_ANNUAIRE" source="FLAG_ACTIF_ANNUAIRE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_QR_NON_RENSEIGNES" source="FLAG_QR_NON_RENSEIGNES"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_COMPTE_DESACTIVE" source="FLAG_COMPTE_DESACTIVE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="FLAG_COMPTE_VERROUILLE" source="FLAG_COMPTE_VERROUILLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_LICENCE" source="MAILBOX_LICENCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_COLOR" source="MAILBOX_COLOR"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="MAILBOX_DISPLAY_NAME" source="MAILBOX_DISPLAY_NAME"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="GROUPE_LIBELLE" source="GROUPE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIVISION_LIBELLE" source="DIVISION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="POLE_LIBELLE" source="POLE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DIRECTION_LIBELLE" source="DIRECTION_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="SOCIETE_LIBELLE" source="SOCIETE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_LIBELLE" source="ENTREPRISE_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="ENTREPRISE_PAYS_LIBELLE" source="ENTREPRISE_PAYS_LIBELLE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUALITY_SECRET_QUESTION" source="QUALITY_SECRET_QUESTION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUALITY_LICENCE" source="QUALITY_LICENCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUALITY_MANAGED_GENERIC" source="QUALITY_MANAGED_GENERIC"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="QUALITY_LAST_AD_CONNECTION" source="QUALITY_LAST_AD_CONNECTION"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="TOP_GRADE" source="TOP_GRADE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="OK_COMPLIANCE" source="OK_COMPLIANCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="NOK_COMPLIANCE" source="NOK_COMPLIANCE"/>
+        <mapping xsi:type="Calculation:AttributeMapping" target="DATE" source="DATE"/>
+      </input>
+      <filter>in (&quot;MAILBOX_COLOR&quot;, 'green', 'yellow') &#xD;
+or (&quot;MAILBOX_COLOR&quot; = 'blue' and &quot;MAILBOX_LICENCE&quot; != 'SHARED')</filter>
+    </calculationView>
+  </calculationViews>
+  <logicalModel id="Filtre_Colors">
+    <descriptions/>
+    <attributes>
+      <attribute id="UPN" order="1" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="UPN"/>
+      </attribute>
+      <attribute id="UPN_MANAGER" order="2" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="UPN Manager"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="UPN_MANAGER"/>
+      </attribute>
+      <attribute id="MANAGED_ACCOUNT" order="3" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Managed Account"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="MANAGED_ACCOUNT"/>
+      </attribute>
+      <attribute id="BOX_TYPE" order="4" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Box Type"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="BOX_TYPE"/>
+      </attribute>
+      <attribute id="MAIL" order="5" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Email"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="MAIL"/>
+      </attribute>
+      <attribute id="DATE_PWD_CHANGED" order="6" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Password Change Date"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="DATE_PWD_CHANGED"/>
+      </attribute>
+      <attribute id="DATE_DERNIERE_CONNEXION_AD" order="7" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last Connection Date"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="DATE_DERNIERE_CONNEXION_AD"/>
+      </attribute>
+      <attribute id="FLAG_GENERIC" order="8" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Flag Generic"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="FLAG_GENERIC"/>
+      </attribute>
+      <attribute id="FLAG_ACTIF_ANNUAIRE" order="9" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Flag Active Directory"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="FLAG_ACTIF_ANNUAIRE"/>
+      </attribute>
+      <attribute id="FLAG_QR_NON_RENSEIGNES" order="10" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Flag QA Filled"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="FLAG_QR_NON_RENSEIGNES"/>
+      </attribute>
+      <attribute id="FLAG_COMPTE_DESACTIVE" order="11" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Flag Unactivated Account"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="FLAG_COMPTE_DESACTIVE"/>
+      </attribute>
+      <attribute id="FLAG_COMPTE_VERROUILLE" order="12" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Flag Locked Account"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="FLAG_COMPTE_VERROUILLE"/>
+      </attribute>
+      <attribute id="MAILBOX_LICENCE" order="13" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mailbox Licence"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="MAILBOX_LICENCE"/>
+      </attribute>
+      <attribute id="MAILBOX_COLOR" order="14" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mailbox Color"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="MAILBOX_COLOR"/>
+      </attribute>
+      <attribute id="MAILBOX_DISPLAY_NAME" order="15" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Mailbox Display Name"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="MAILBOX_DISPLAY_NAME"/>
+      </attribute>
+      <attribute id="GROUPE_LIBELLE" order="16" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Group"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="GROUPE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIVISION_LIBELLE" order="17" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Division"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="DIVISION_LIBELLE"/>
+      </attribute>
+      <attribute id="POLE_LIBELLE" order="18" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Pole"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="POLE_LIBELLE"/>
+      </attribute>
+      <attribute id="DIRECTION_LIBELLE" order="19" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Direction"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="DIRECTION_LIBELLE"/>
+      </attribute>
+      <attribute id="SOCIETE_LIBELLE" order="20" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Company"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="SOCIETE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_LIBELLE" order="21" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Business Unit"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="ENTREPRISE_LIBELLE"/>
+      </attribute>
+      <attribute id="ENTREPRISE_PAYS_LIBELLE" order="22" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="BU Country"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="ENTREPRISE_PAYS_LIBELLE"/>
+      </attribute>
+      <attribute id="QUALITY_SECRET_QUESTION" order="23" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Secret Question Compliance"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="QUALITY_SECRET_QUESTION"/>
+      </attribute>
+      <attribute id="QUALITY_LICENCE" order="24" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Licence Compliance"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="QUALITY_LICENCE"/>
+      </attribute>
+      <attribute id="QUALITY_MANAGED_GENERIC" order="25" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Managed Generic Compliance"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="QUALITY_MANAGED_GENERIC"/>
+      </attribute>
+      <attribute id="QUALITY_LAST_AD_CONNECTION" order="26" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Last AD Connection Compliance"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="QUALITY_LAST_AD_CONNECTION"/>
+      </attribute>
+      <attribute id="DATE" order="31" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Date"/>
+        <keyMapping columnObjectName="Filtre_Colors" columnName="DATE"/>
+      </attribute>
+    </attributes>
+    <calculatedAttributes>
+      <calculatedAttribute id="PERIODE" hidden="false" order="32" semanticType="empty" attributeHierarchyActive="false" displayAttribute="false">
+        <descriptions defaultDescription="Period"/>
+        <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+          <formula>format(&quot;DATE&quot;,'YYYY-MM')</formula>
+        </keyCalculation>
+      </calculatedAttribute>
+    </calculatedAttributes>
+    <privateDataFoundation>
+      <tableProxies/>
+      <joins/>
+      <layout>
+        <shapes/>
+      </layout>
+    </privateDataFoundation>
+    <baseMeasures>
+      <measure id="TOP_GRADE" order="28" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="Top Grade"/>
+        <measureMapping columnObjectName="Filtre_Colors" columnName="TOP_GRADE"/>
+      </measure>
+      <measure id="OK_COMPLIANCE" order="29" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="OK"/>
+        <measureMapping columnObjectName="Filtre_Colors" columnName="OK_COMPLIANCE"/>
+      </measure>
+      <measure id="NOK_COMPLIANCE" order="30" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="NOK"/>
+        <measureMapping columnObjectName="Filtre_Colors" columnName="NOK_COMPLIANCE"/>
+      </measure>
+    </baseMeasures>
+    <calculatedMeasures>
+      <measure id="NB_ACCOUNT" hidden="false" order="27" aggregationType="sum" measureType="simple" aggregatable="true" calculatedMeasureType="counter" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <descriptions defaultDescription="Accounts Number"/>
+        <exceptionAggregation exceptionAggregationType="countDistinct">
+          <attribute attributeName="UPN"/>
+        </exceptionAggregation>
+        <formula>1</formula>
+      </measure>
+    </calculatedMeasures>
+    <restrictedMeasures/>
+    <localDimensions/>
+  </logicalModel>
+  <layout>
+    <shapes>
+      <shape expanded="false" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+        <upperLeftCorner x="40" y="85"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="380"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="260"/>
+        <rectangleSize height="-1" width="-1"/>
+      </shape>
+      <shape expanded="true" modelObjectName="Filtre_Colors" modelObjectNameSpace="CalculationView">
+        <upperLeftCorner x="40" y="180"/>
+        <rectangleSize height="0" width="0"/>
+      </shape>
+    </shapes>
+  </layout>
+</Calculation:scenario>
